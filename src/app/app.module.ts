@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from './shared/components/components.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ComponentsModule,
+    MaterialModule
     
   ],
   providers: [],
