@@ -13,6 +13,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatSidenavModule} from '@angular/material/sidenav'
+import { MatDividerModule } from "@angular/material/divider";
 
 
 const myModules = [
@@ -30,8 +32,8 @@ const myModules = [
     MatSelectModule,
     MatTabsModule,
     MatStepperModule,
-
-
+    MatSidenavModule,
+    MatDividerModule
 
 ];
 
