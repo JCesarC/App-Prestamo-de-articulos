@@ -29,9 +29,11 @@
     </button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z4">Main Content</div>
+    <div class="content mat-elevation-z4">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- <app-header></app-header> -->
-<router-outlet></router-outlet>
+
 <app-footer></app-footer>
