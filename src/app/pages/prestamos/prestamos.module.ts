@@ -7,11 +7,13 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NuevoPrestamoComponent } from './nuevo-prestamo/nuevo-prestamo.component';
 
 
 @NgModule({
   declarations: [
-    PrestamosComponent
+    PrestamosComponent,
+    NuevoPrestamoComponent
   ],
   imports: [
     CommonModule,
