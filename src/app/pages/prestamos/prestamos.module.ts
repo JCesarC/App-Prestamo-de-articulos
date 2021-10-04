@@ -8,8 +8,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NuevoPrestamoComponent } from './nuevo-prestamo/nuevo-prestamo.component';
-
-
 @NgModule({
   declarations: [
     PrestamosComponent,
@@ -22,7 +20,8 @@ import { NuevoPrestamoComponent } from './nuevo-prestamo/nuevo-prestamo.componen
     MatSortModule,
     ReactiveFormsModule,
     FormsModule,
-    MatPaginatorModule
-  ]
+    MatPaginatorModule,
+    
+  ],
 })
 export class PrestamosModule { }

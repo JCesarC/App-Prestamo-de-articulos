@@ -9,6 +9,10 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { MaterialModule } from './material.module';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +24,8 @@ import { MaterialModule } from './material.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
     
   ],
   providers: [],
