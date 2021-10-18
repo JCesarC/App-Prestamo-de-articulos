@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -9,38 +9,37 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatStepperModule} from '@angular/material/stepper'; 
-import {MatSidenavModule} from '@angular/material/sidenav'
-import { MatDividerModule } from "@angular/material/divider";
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const myModules = [
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatListModule,
-    MatIconModule,
-    MatInputModule,
-    MatCardModule,
-    MatTableModule,
-    MatSortModule,
-    MatDialogModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatStepperModule,
-    MatSidenavModule,
-    MatDividerModule
-
+  MatToolbarModule,
+  MatButtonModule,
+  MatMenuModule,
+  MatListModule,
+  MatIconModule,
+  MatInputModule,
+  MatCardModule,
+  MatTableModule,
+  MatSortModule,
+  MatDialogModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatTabsModule,
+  MatStepperModule,
+  MatSidenavModule,
+  MatDividerModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({
-    imports:[...myModules],
-    exports:[...myModules],
-
+  imports: [...myModules],
+  exports: [...myModules],
 })
-
-export class MaterialModule{}
+export class MaterialModule {}
