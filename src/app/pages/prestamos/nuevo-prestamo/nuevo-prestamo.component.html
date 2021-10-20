@@ -49,6 +49,12 @@
   </mat-form-field>
 </div>
 <div>
+  <li *ngFor="let articulo of articuloArray" class="list-group-item">
+      {{articulo.nombre}}
+  </li>
+</div>
+<br>
+<div>
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Fecha de devolucion</mat-label>
@@ -58,6 +64,9 @@
     </mat-form-field>
   </p>
 </div>
+
+<br>
+<button type="button" class="btn btn-success">Finalizar</button>
 
 <!-- <button class="btn btn-danger" (click)="triggerModal(modalData)">Open Modal</button> -->
 
