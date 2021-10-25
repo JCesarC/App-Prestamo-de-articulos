@@ -39,12 +39,12 @@ export class NuevoPrestamoComponent implements OnInit {
   model: NgbDateStruct;
 
   closeModal: string;
-  inputUsuario = new FormControl({ value: 'Ejemplo nombre', disabled: true });
+  inputUsuario = new FormControl({ value: '', disabled: true });
   inputMatricula = new FormControl({
-    value: 'Ejemplo matricula',
+    value: '',
     disabled: true,
   });
-  inputGrupo = new FormControl({ value: 'Ejemplo grupo', disabled: true });
+  inputGrupo = new FormControl({ value: '', disabled: true });
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...Usuarios_DATA];

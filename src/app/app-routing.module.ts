@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { NuevoPrestamoComponent } from './pages/prestamos/nuevo-prestamo/nuevo-prestamo.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
   },
   { path: 'reportes', loadChildren: () => import('./pages/reportes/reportes.module').then(m => m.ReportesModule) },
   { path: '**', pathMatch: 'full', redirectTo: 'notFound' },
+  { path: 'nuevo', component:  NuevoPrestamoComponent},
 ];
 
 @NgModule({
