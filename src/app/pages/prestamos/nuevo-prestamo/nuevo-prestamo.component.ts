@@ -83,7 +83,7 @@ export class NuevoPrestamoComponent implements OnInit {
   }
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent);
-
+    
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });

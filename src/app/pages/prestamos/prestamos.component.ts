@@ -30,6 +30,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class PrestamosComponent implements OnInit {
   constructor() {}
+  activo = "Prestamos"
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
   sort: MatSort = new MatSort();
