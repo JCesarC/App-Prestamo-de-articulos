@@ -12,13 +12,14 @@
     <a mat-tab-link (click)="activo = 'Nuevo'" [active]="activo == 'Nuevo'"
       >Nuevo</a
     >
-    <a mat-tab-link (click)="activo = 'Editar'" [active]="activo == 'Editar'"
+    <a mat-tab-link disabled (click)="activo = 'Editar'" [active]="activo == 'Editar'" 
       >Editar Usuario</a
     >
   </nav>
 </div>
 
 <div *ngIf="activo == 'Usuarios'">
+  <a mat-raised-button color="primary" (click)="activo = 'Editar'">Editar</a>
   <div class="search-div">
     <mat-form-field class="search-form-field">
       <input

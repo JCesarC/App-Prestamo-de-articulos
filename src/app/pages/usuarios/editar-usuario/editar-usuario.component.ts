@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar-usuario.component.scss']
 })
 export class EditarUsuarioComponent implements OnInit {
+  rol: 'Estudiante' | 'Administrativo' | 'Otro' = 'Estudiante'
 
   constructor() { }
 

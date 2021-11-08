@@ -1,0 +1,26 @@
+<h1>Registrar nuevo articulo</h1>
+<br>
+<div>
+    <p>
+        <mat-form-field class="form-registro">
+          <mat-label>Descripción o nombre del articulo</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </p>
+      <section class="consumible">
+          <mat-checkbox class="consum-margin" [(ngModel)]="consumible" [labelPosition]="posConsumible">Es consumible</mat-checkbox>
+      </section>
+      
+      <p>
+        <mat-form-field class="form-registro">
+          <mat-label>Cantidad</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </p>  
+      <p>
+        <mat-form-field class="form-registro">
+          <mat-label>Cantidad minima</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </p>  
+</div>
