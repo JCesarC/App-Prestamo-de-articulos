@@ -8,6 +8,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { Articulo } from '@app/shared/models/articulo.interface';
+import { ArticuloService } from '@app/pages/articulos/articulo.service';
 
 export interface Usuarios {
   name: string;
@@ -52,17 +53,26 @@ export class NuevoPrestamoComponent implements OnInit {
   articuloArray: Articulo[] = [
     {
       id: 1,
-      nombre: 'Ejemplo articulo 1',
-      cantidad: 2,
+      descripcion: 'Ejemplo articulo 1',
+      stock: 2,
+      estatus: 'Disponible',
+      codigo: '00000',
+      cantidad: 3,
     },
     {
       id: 2,
-      nombre: 'Ejemplo articulo 2',
+      descripcion: 'Ejemplo articulo 1',
+      stock: 2,
+      estatus: 'Disponible',
+      codigo: '00000',
       cantidad: 4,
     },
     {
       id: 3,
-      nombre: 'Ejemplo articulo 3',
+      descripcion: 'Ejemplo articulo 1',
+      stock: 2,
+      estatus: 'Disponible',
+      codigo: '00000',
       cantidad: 2,
     },
   ];
@@ -72,7 +82,8 @@ export class NuevoPrestamoComponent implements OnInit {
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private artSvc: ArticuloService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -83,13 +94,17 @@ export class NuevoPrestamoComponent implements OnInit {
   }
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent);
-    
+
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
   ngOnInit(): void {
     this.inputUsuario.disable();
+
+    this.artSvc.getAll().subscribe((articulos) => {
+      console.log('Artitulos encontrados: ', articulos);
+    });
   }
   triggerModal(content) {
     this.modalService

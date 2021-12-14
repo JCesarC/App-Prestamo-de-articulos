@@ -9,7 +9,7 @@ export interface user{
 }
 
 export interface userResponse{
-    id:number;
+    
     Nombres:string;
     Apellidos:string;
     MatriculaCodigo:string;
