@@ -102,9 +102,7 @@ export class NuevoPrestamoComponent implements OnInit {
   ngOnInit(): void {
     this.inputUsuario.disable();
 
-    this.artSvc.getAll().subscribe((articulos) => {
-      console.log('Artitulos encontrados: ', articulos);
-    });
+
   }
   triggerModal(content) {
     this.modalService

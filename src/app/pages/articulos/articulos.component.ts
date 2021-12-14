@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { ArticuloService } from './articulo.service';
 
 
 export interface PeriodicElement {
@@ -40,9 +41,12 @@ export class ArticulosComponent implements OnInit {
   sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-  constructor() { }
+  constructor(private artSvc:ArticuloService) { }
 
   ngOnInit(): void {
+    this.artSvc.getAll().subscribe((articulos) => {
+      console.log('Artitulos encontrados: ', articulos);
+    });
   }
   onSearchClear() {
     this.searchKey = '';
