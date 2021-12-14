@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
-import { Articulo } from 'src/app/models/articulo';
+import { Articulo } from '@app/shared/models/articulo.interface';
 
 export interface Usuarios {
   name: string;

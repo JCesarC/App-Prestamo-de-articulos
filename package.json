@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "server": "cd api-lab && npm run dev",
+    "dev":"concurrently \"npm run server\" \"npm run start\""
   },
   "private": true,
   "dependencies": {
@@ -24,10 +26,12 @@
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.1.1",
+    "concurrently": "^6.4.0",
     "jquery": "^3.6.0",
     "material-icons": "^1.10.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
+    "typeorm": "^0.2.38",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
