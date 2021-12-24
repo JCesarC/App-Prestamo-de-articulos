@@ -47,11 +47,21 @@ export class NuevoPrestamoComponent implements OnInit {
 
   closeModal: string;
   inputUsuario = new FormControl({ value: '', disabled: true });
+  inputApellidos = new FormControl({ value: '', disabled: true });
   inputMatricula = new FormControl({
     value: '',
     disabled: true,
   });
-  inputGrupo = new FormControl({ value: '', disabled: true });
+
+  userSearch: string;
+  articuloSearch: string;
+  userSelected: User = {
+    id: 0,
+    Nombres: '',
+    Apellidos: '',
+    MatriculaCodigo: '',
+    rol: undefined,
+  };
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...Usuarios_DATA];
@@ -59,27 +69,11 @@ export class NuevoPrestamoComponent implements OnInit {
   articuloArray: Articulo[] = [
     {
       id: 1,
-      descripcion: 'Ejemplo articulo 1',
-      stock: 2,
+      descripcion: 'Articulo',
+      codigo: '000001',
       estatus: 'Disponible',
-      codigo: '00000',
-      cantidad: 3,
-    },
-    {
-      id: 2,
-      descripcion: 'Ejemplo articulo 1',
-      stock: 2,
-      estatus: 'Disponible',
-      codigo: '00000',
-      cantidad: 4,
-    },
-    {
-      id: 3,
-      descripcion: 'Ejemplo articulo 1',
-      stock: 2,
-      estatus: 'Disponible',
-      codigo: '00000',
-      cantidad: 2,
+      cantidad: 1,
+      stock: 3,
     },
   ];
 
@@ -122,13 +116,26 @@ export class NuevoPrestamoComponent implements OnInit {
     });
   }
 
-  openModalUsers() {
+  openModal(type: string) {
     const modalRef = this.modalService.open(ModalPrestamosComponent, {
       size: 'lg',
       scrollable: true,
     });
-    modalRef.componentInstance.dataUsers = this.dataUsers;
-    modalRef.componentInstance.type = 'users';
+    if (type == 'users') {
+      modalRef.componentInstance.data = this.dataUsers;
+      modalRef.componentInstance.type = 'users';
+      modalRef.componentInstance.search = this.userSearch;
+      modalRef.result.then((result) => {
+        if (result) {
+          console.log(result);
+          this.userSelected = result;
+        }
+      });
+    } else if (type == 'articulos') {
+      modalRef.componentInstance.data = this.dataArticulos;
+      modalRef.componentInstance.type = 'articulos';
+      modalRef.componentInstance.search = this.articuloSearch;
+    }
 
     // modalRef.componentInstance.dataArticulos = this.dataArticulos;
   }

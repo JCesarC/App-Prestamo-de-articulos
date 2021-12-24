@@ -12,9 +12,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-prestamos.component.scss'],
 })
 export class ModalPrestamosComponent implements OnInit {
-  @Input() public dataUsers;
-  @Input() public dataArticulos;
+  @Input() public data;
   @Input() public type: string;
+  @Input() public search:string;
+
+  searchKey:string;
 
   displayedColumnsUsers: string[] = [
     'Id',
@@ -41,13 +43,13 @@ export class ModalPrestamosComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {
-    if (this.type == 'users') {
-      this.showUsers();
-    } else if (this.type == 'articulos') {
-      this.showArticulos();
-    }
+    this.showElements();
+    this.searchKey = this.search;
+    this.applyFilter();
 
-    console.log(this.dataUsers);
+
+
+    console.log(this.data);
     // let dataType: string = this.data?.dataType;
 
     // if (dataType == 'Articulos') {
@@ -56,15 +58,21 @@ export class ModalPrestamosComponent implements OnInit {
     //   this.selectUsers();
     // }
   }
-  showUsers() {
-    this.dataSource.data = this.dataUsers;
-  }
-  showArticulos() {
-    this.dataSource.data = this.dataArticulos;
+  showElements() {
+    this.dataSource.data = this.data;
   }
 
   selectElement(element){
     console.log(element)
+    this.activeModal.close(element)
+  }
+
+  onSearchClear(){
+    this.searchKey = '';
+    this.applyFilter();
+  }
+  applyFilter(){
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
   // selectArticulos() {
