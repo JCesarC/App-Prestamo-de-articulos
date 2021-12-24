@@ -9,8 +9,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { MaterialModule } from './material.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ModalPrestamosComponent } from './pages/prestamos/modal-prestamos/modal-prestamos.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -23,7 +24,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NgbModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent],
+  entryComponents:[ModalPrestamosComponent]
 })
 export class AppModule {}

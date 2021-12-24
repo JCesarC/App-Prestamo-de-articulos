@@ -11,12 +11,14 @@ import { NuevoPrestamoComponent } from './nuevo-prestamo/nuevo-prestamo.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarPrestamoComponent } from './editar-prestamo/editar-prestamo.component';
 import { ConfirmarPrestamoComponent } from './confirmar-prestamo/confirmar-prestamo.component';
+import { ModalPrestamosComponent } from './modal-prestamos/modal-prestamos.component';
 @NgModule({
   declarations: [
     PrestamosComponent,
     NuevoPrestamoComponent,
     EditarPrestamoComponent,
-    ConfirmarPrestamoComponent
+    ConfirmarPrestamoComponent,
+    ModalPrestamosComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { ConfirmarPrestamoComponent } from './confirmar-prestamo/confirmar-prest
     ReactiveFormsModule,
     FormsModule,
     MatPaginatorModule,
-    NgbModule
+    NgbModule,
+    
     
   ],
 })

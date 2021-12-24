@@ -1,6 +1,6 @@
 import { rol } from "./rol.interface";
 
-export interface user{
+export interface User{
     id:number;
     Nombres:string;
     Apellidos:string;

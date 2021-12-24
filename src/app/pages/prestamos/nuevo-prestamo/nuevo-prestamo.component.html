@@ -8,7 +8,7 @@
       matSuffix
       mat-stroked-button
       aria-label="search"
-      (click)="triggerModal(modalData)"
+      (click)="openModalUsers()"
     >
       <mat-icon>search</mat-icon>
     </button>
@@ -42,7 +42,7 @@
       matSuffix
       mat-stroked-button
       aria-label="search"
-      (click)="openScrollableContent(longContent)"
+      (click)="openModalArticulos()"
     >
       <mat-icon>search</mat-icon>
     </button>
@@ -146,7 +146,7 @@
   </div>
 </ng-template>
 
-<ng-template #longContent let-modal>
+<ng-template #usersContent let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Modal title</h4>
     <button
@@ -208,4 +208,76 @@
       Cancelar
     </button>
   </div>
+
+
+
 </ng-template>
+
+<ng-template #articulosContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8 demo-table"
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef>Weight</th>
+        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef>Symbol</th>
+        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <mat-form-field class="form-modal" appearance="fill">
+      <mat-label>Buscar articulo</mat-label>
+      <input matInput />
+      <button mat-button matSuffix mat-stroked-button aria-label="search">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.close('Save click')"
+    >
+      Cancelar
+    </button>
+  </div>
+
+
+
+</ng-template>
+
+

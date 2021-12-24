@@ -1,0 +1,131 @@
+<div *ngIf="type == 'users'">
+  <div class="modal-header">
+    <h4 class="modal-title">Buscar Usuario</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Nombres">
+          <th mat-header-cell *matHeaderCellDef>Nombres</th>
+          <td mat-cell *matCellDef="let element">{{ element.Nombres }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Apellidos">
+          <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+          <td mat-cell *matCellDef="let element">{{ element.Apellidos }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Matricula o Codigo">
+          <th mat-header-cell *matHeaderCellDef>Matricula o Codigo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.MatriculaCodigo }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Rol">
+          <th mat-header-cell *matHeaderCellDef>Rol</th>
+          <td mat-cell *matCellDef="let element">{{ element.rol.rol }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Accion">
+          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="table-button-row">
+              <button
+                (click)="selectElement(element)"
+                mat-flat-button
+                color="accent"
+              >
+                Seleccionar
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsUsers"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsUsers"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</div>
+
+<div *ngIf="type == 'articulos'">
+  <div class="modal-header">
+    <h4 class="modal-title">Buscar Articulo</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>id</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Descripcion">
+          <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+          <td mat-cell *matCellDef="let element">{{ element.Descripcion }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Estatus">
+          <th mat-header-cell *matHeaderCellDef>Estatus</th>
+          <td mat-cell *matCellDef="let element">{{ element.Estatus }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Codigo">
+          <th mat-header-cell *matHeaderCellDef>Codigo</th>
+          <td mat-cell *matCellDef="let element">{{ element.Codigo }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Stock">
+          <th mat-header-cell *matHeaderCellDef>Stock</th>
+          <td mat-cell *matCellDef="let element">{{ element.Stock }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="Accion">
+          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="table-button-row">
+              <button
+                (click)="selectElement(element)"
+                mat-flat-button
+                color="accent"
+              >
+                Seleccionar
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsArticulos"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumnsArticulos"
+        ></tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</div>

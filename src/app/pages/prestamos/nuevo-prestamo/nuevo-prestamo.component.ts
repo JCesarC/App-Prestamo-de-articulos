@@ -1,14 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModal,
+  NgbModalConfig,
+  NgbActiveModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
+import { ModalPrestamosComponent } from '../modal-prestamos/modal-prestamos.component';
 import { Articulo } from '@app/shared/models/articulo.interface';
 import { ArticuloService } from '@app/pages/articulos/articulo.service';
+import { UserService } from '@app/pages/usuarios/user.service';
+import { User } from '@app/shared/models/user.interface';
 
 export interface Usuarios {
   name: string;
@@ -18,7 +24,7 @@ export interface Usuarios {
 }
 
 const Usuarios_DATA: Usuarios[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 1, name: 'Hydrogene', weight: 1.0079, symbol: 'H' },
   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
   { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
   { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
@@ -83,27 +89,59 @@ export class NuevoPrestamoComponent implements OnInit {
     config: NgbModalConfig,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    private artSvc: ArticuloService
+    private artSvc: ArticuloService,
+    private userSvc: UserService,
+    public activeModal: NgbActiveModal
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
+  dataUsers: User[];
+  dataArticulos;
+
   openScrollableContent(longContent) {
     this.modalService.open(longContent, { scrollable: true });
   }
-  openDialog() {
-    const dialogRef = this.dialog.open(ModalComponent);
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(ModalComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
   ngOnInit(): void {
     this.inputUsuario.disable();
 
+    this.artSvc.getAll().subscribe((articulos) => {
+      this.dataArticulos = articulos;
+    });
 
+    this.userSvc.getAll().subscribe((users) => {
+      this.dataUsers = users;
+    });
   }
+
+  openModalUsers() {
+    const modalRef = this.modalService.open(ModalPrestamosComponent, {
+      size: 'lg',
+      scrollable: true,
+    });
+    modalRef.componentInstance.dataUsers = this.dataUsers;
+    modalRef.componentInstance.type = 'users';
+
+    // modalRef.componentInstance.dataArticulos = this.dataArticulos;
+  }
+
+  openModalArticulos() {
+    const modalRef = this.modalService.open(ModalPrestamosComponent, {
+      scrollable: true,
+      size: 'lg',
+    });
+    modalRef.componentInstance.dataArticulos = this.dataArticulos;
+    modalRef.componentInstance.type = 'articulos';
+  }
+
   triggerModal(content) {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
