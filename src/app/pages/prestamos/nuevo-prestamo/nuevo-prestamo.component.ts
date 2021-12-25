@@ -53,8 +53,8 @@ export class NuevoPrestamoComponent implements OnInit {
     disabled: true,
   });
 
-  userSearch: string;
-  articuloSearch: string;
+  userSearch: string = '';
+  articuloSearch: string = '';
   userSelected: User = {
     id: 0,
     Nombres: '',
@@ -66,16 +66,7 @@ export class NuevoPrestamoComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...Usuarios_DATA];
 
-  articuloArray: Articulo[] = [
-    {
-      id: 1,
-      descripcion: 'Articulo',
-      codigo: '000001',
-      estatus: 'Disponible',
-      cantidad: 1,
-      stock: 3,
-    },
-  ];
+  articulosArray: Articulo[] = [];
 
   @ViewChild(MatTable) table: MatTable<Usuarios>;
 
@@ -135,6 +126,16 @@ export class NuevoPrestamoComponent implements OnInit {
       modalRef.componentInstance.data = this.dataArticulos;
       modalRef.componentInstance.type = 'articulos';
       modalRef.componentInstance.search = this.articuloSearch;
+      modalRef.result.then((result) => {
+        if (result) {
+          console.log(result);
+          result.Cantidad = 1;
+          const found = this.articulosArray.some((x) => x.id === result.id);
+          if (!found) {
+            this.articulosArray.push(result);
+          } 
+        }
+      });
     }
 
     // modalRef.componentInstance.dataArticulos = this.dataArticulos;
@@ -147,6 +148,20 @@ export class NuevoPrestamoComponent implements OnInit {
     });
     modalRef.componentInstance.dataArticulos = this.dataArticulos;
     modalRef.componentInstance.type = 'articulos';
+  }
+
+  addArticulo(articulo: Articulo) {
+    if (articulo.Cantidad < articulo.Stock) {
+      articulo.Cantidad = articulo.Cantidad + 1;
+    }
+  }
+
+  removeArticulo(articulo: Articulo) {
+    if (articulo.Cantidad > 1) {
+      articulo.Cantidad = articulo.Cantidad - 1;
+    } else {
+      this.articulosArray = this.articulosArray.filter((x) => x != articulo);
+    }
   }
 
   triggerModal(content) {

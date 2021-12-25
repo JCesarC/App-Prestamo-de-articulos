@@ -1,75 +1,111 @@
 <h1>Nuevo prestamo de articulos</h1>
-<div class="search-div">
-  <mat-form-field class="form-fields" appearance="fill">
-    <mat-label>Buscar usuario</mat-label>
-    <input
-      matInput
-      [(ngModel)]="userSearch"
-      autocomplete="off"
-      (keyup.enter)="openModal('users')"
-    />
-    <button
-      mat-button
-      matSuffix
-      mat-stroked-button
-      aria-label="search"
-      (click)="openModal('users')"
-    >
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
-</div>
-
-<div class="content-form">
-  <mat-form-field class="form-fields">
-    <mat-label>Nombre</mat-label>
-
-    <input
-      matInput
-      [(ngModel)]="userSelected.Nombres"
-      [formControl]="inputUsuario"
-    />
-  </mat-form-field>
-  <mat-form-field class="form-fields">
-    <mat-label>Apellidos</mat-label>
-
-    <input
-      matInput
-      [(ngModel)]="userSelected.Apellidos"
-      [formControl]="inputApellidos"
-    />
-  </mat-form-field>
-  <mat-form-field class="form-fields">
-    <mat-label>Matricula</mat-label>
-
-    <input matInput  [(ngModel)]="userSelected.MatriculaCodigo" [formControl]="inputMatricula" />
-  </mat-form-field>
-</div>
-
-<div class="search-div">
-  <mat-form-field class="form-fields" appearance="fill">
-    <mat-label>Buscar articulo</mat-label>
-    <input matInput [(ngModel)]="articuloSearch" (keyup.enter)="openModal('articulos')" />
-    <button
-      mat-button
-      matSuffix
-      mat-stroked-button
-      aria-label="search"
-      (click)="openModal('articulos')"
-    >
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
-</div>
 <div class="row">
   <div class="col-md-8">
+    <div class="search-div">
+      <mat-form-field class="form-fields" appearance="fill">
+        <mat-label>Buscar usuario</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userSearch"
+          autocomplete="off"
+          (keyup.enter)="openModal('users')"
+        />
+        <button
+          mat-button
+          matSuffix
+          mat-stroked-button
+          aria-label="search"
+          (click)="openModal('users')"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    
+    <div class="content-form">
+      <mat-form-field class="form-fields">
+        <mat-label>Nombre</mat-label>
+    
+        <input
+          matInput
+          [(ngModel)]="userSelected.Nombres"
+          [formControl]="inputUsuario"
+        />
+      </mat-form-field>
+      <mat-form-field class="form-fields">
+        <mat-label>Apellidos</mat-label>
+    
+        <input
+          matInput
+          [(ngModel)]="userSelected.Apellidos"
+          [formControl]="inputApellidos"
+        />
+      </mat-form-field>
+      <mat-form-field class="form-fields">
+        <mat-label>Matricula</mat-label>
+    
+        <input
+          matInput
+          [(ngModel)]="userSelected.MatriculaCodigo"
+          [formControl]="inputMatricula"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-8">
+    <mat-form-field class="form-fields" appearance="fill">
+      <mat-label>Buscar articulo</mat-label>
+      <input
+        matInput
+        [(ngModel)]="articuloSearch"
+        (keyup.enter)="openModal('articulos')"
+      />
+      <button
+        mat-button
+        matSuffix
+        mat-stroked-button
+        aria-label="search"
+        (click)="openModal('articulos')"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+ 
+</div>
+<div class="row" *ngIf="articulosArray.length >= 1; else emptyArticulos">
+  <div class="col-md-8">
     <ul class="list-group">
-      <li *ngFor="let articulo of articuloArray" class="list-group-item list-group-item-action" >
-        <span class="badge badge-secondary"> {{articulo.cantidad}}</span>{{articulo.descripcion}}
+      <li
+        *ngFor="let articulo of articulosArray"
+        class="list-group-item list-group-item-action"
+      >
+        <div class="articulos-title">
+          <button
+            mat-button
+            class="operation-button"
+            (click)="addArticulo(articulo)"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+          <button
+            mat-button
+            class="operation-button"
+            (click)="removeArticulo(articulo)"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+
+          <span class="badge badge-primary"> {{ articulo.Cantidad }}</span>
+          {{ articulo.Descripcion }}
+        </div>
       </li>
     </ul>
   </div>
- 
 </div>
 <br />
 <div>
@@ -92,9 +128,19 @@
 
 <br />
 
-
-
-
-
-
-
+<ng-template #emptyArticulos>
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li
+         
+          class="list-group-item list-group-item-action"
+        >
+        <h2>Aún no se han agregado articulos</h2>
+        </li>
+       </ul>
+    </div>
+  </div>
+  
+ 
+</ng-template>

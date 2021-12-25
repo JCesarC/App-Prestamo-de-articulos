@@ -13,7 +13,7 @@
 }
 .form-fields{
   
-  width: 60%;
+  width: 100%;
   size: 10%;
   margin-bottom: 10px;
 }
@@ -38,5 +38,17 @@
   .btn{
     margin-right: 10px;
   }
+}
+.operation-button{
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+    mat-icon{
+      font-size: 20px;
+    }
+  
+}
+.articulos-title{
+  font-size: medium;
 }
 

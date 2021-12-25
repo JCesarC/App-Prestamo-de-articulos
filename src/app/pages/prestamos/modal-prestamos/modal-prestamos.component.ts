@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Articulo } from '@app/shared/models/articulo.interface';
 import { User } from '@app/shared/models/user.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,9 +15,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalPrestamosComponent implements OnInit {
   @Input() public data;
   @Input() public type: string;
-  @Input() public search:string;
+  @Input() public search: string;
 
-  searchKey:string;
+  searchKey: string;
 
   displayedColumnsUsers: string[] = [
     'Id',
@@ -47,8 +48,6 @@ export class ModalPrestamosComponent implements OnInit {
     this.searchKey = this.search;
     this.applyFilter();
 
-
-
     console.log(this.data);
     // let dataType: string = this.data?.dataType;
 
@@ -62,18 +61,19 @@ export class ModalPrestamosComponent implements OnInit {
     this.dataSource.data = this.data;
   }
 
-  selectElement(element){
-    console.log(element)
-    this.activeModal.close(element)
+  selectElement(element) {
+    console.log(element);
+    this.activeModal.close(element);
   }
 
-  onSearchClear(){
+  onSearchClear() {
     this.searchKey = '';
     this.applyFilter();
   }
-  applyFilter(){
+  applyFilter() {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
+
 
   // selectArticulos() {
   //   this.dataSource = this.data?.arrayArticulos;
