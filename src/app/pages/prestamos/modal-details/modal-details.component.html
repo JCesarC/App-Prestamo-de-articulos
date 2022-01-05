@@ -1,0 +1,208 @@
+<ng-container
+  *ngIf="type === 'showDetails'; then detailsTemplate; else confirmTemplate"
+>
+</ng-container>
+
+<ng-template #detailsTemplate>
+  <div class="modal-header">
+    <h2 class="modal-title">Detalles de prestamo</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Datos del Prestamo </mat-panel-title>
+          <mat-panel-description>
+            Detalles del usuario y del prestamo
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="content-form">
+            <mat-form-field class="form-fields">
+              <mat-label>Usuario</mat-label>
+              <input matInput type="text" [formControl]="inputUsuario" />
+            </mat-form-field>
+            <mat-form-field class="form-fields">
+              <mat-label>Matricula o código</mat-label>
+              <input matInput type="text" [formControl]="inputMatricula" />
+            </mat-form-field>
+
+            <mat-form-field class="form-fields">
+              <mat-label>Estatus</mat-label>
+              <input matInput type="text" [formControl]="inputEstatus" />
+            </mat-form-field>
+
+            <mat-form-field class="form-fields">
+              <mat-label>Fecha de prestamo</mat-label>
+              <input matInput type="text" [formControl]="inputFechaPrestamo" />
+            </mat-form-field>
+
+            <mat-form-field class="form-fields">
+              <mat-label>Hora</mat-label>
+              <input matInput type="text" [formControl]="inputHora" />
+            </mat-form-field>
+
+            <mat-form-field class="form-fields">
+              <mat-label>Fecha limite</mat-label>
+              <input matInput type="text" [formControl]="inputFechaLimite" />
+            </mat-form-field>
+            <mat-form-field
+              class="form-fields"
+              *ngIf="dataPrestamo.Fecha_devolucion !== ''; else noDevuelto"
+            >
+              <mat-label>Fecha de devolución</mat-label>
+              <input
+                matInput
+                type="text"
+                [formControl]="inputFechaDevolucion"
+              />
+            </mat-form-field>
+
+            <mat-form-field
+              class="form-fields"
+              *ngIf="dataPrestamo.Comentarios !== ''; else noComentarios"
+            >
+              <mat-label>Comentarios</mat-label>
+              <textarea matInput [formControl]="inputComentarios"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Articulos </mat-panel-title>
+          <mat-panel-description>
+            Detalles de los articulos del prestamo
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-8">
+            <h2>Articulos</h2>
+            <ul class="list-group">
+              <li
+                class="list-group-item list-group-item-action"
+                *ngFor="let articulo of articulosArray"
+              >
+                <div>
+                  <span class="badge badge-primary">{{
+                    articulo.cantidad
+                  }}</span>
+                  {{ articulo.Articulo.Descripcion }}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="Close()">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #confirmTemplate>
+  <div class="modal-header">
+    <h2 class="modal-title">Detalles de prestamo</h2>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="content-form">
+        <mat-form-field class="form-fields">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" [formControl]="inputUsuario" />
+        </mat-form-field>
+        <mat-form-field class="form-fields">
+          <mat-label>Matricula o código</mat-label>
+          <input matInput type="text" [formControl]="inputMatricula" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Articulos</h2>
+        <ul class="list-group">
+          <li
+            class="list-group-item list-group-item-action"
+            *ngFor="let articulo of articulosArray"
+          >
+            <div>
+              <button
+                mat-button
+                class="operation-button"
+                (click)="addArticulo(articulo)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                mat-button
+                class="operation-button"
+                (click)="removeArticulo(articulo)"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="badge badge-primary">{{ articulo.cantidad }}</span>
+              {{ articulo.Articulo.Descripcion }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="content-form">
+        <mat-form-field class="form-fields">
+          <mat-label>Comentarios</mat-label>
+          <textarea matInput [(ngModel)]="dataPrestamo.Comentarios"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="Close()">
+      Cancelar
+    </button>
+    <button
+      type="button"
+      ngbAutofocus
+      class="btn btn-success"
+      (click)="closeModal()"
+    >
+      Confirmar
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #noDevuelto>
+  <h3>
+    <span class="badge badge-warning"
+      >Aún no se han regresado los articulos</span
+    >
+  </h3>
+  <mat-divider class="mats"></mat-divider>
+</ng-template>
+<ng-template #noComentarios>
+  <h3>
+    <span class="badge badge-info">No se agregaron comentarios</span>
+  </h3>
+  <mat-divider class="mats"></mat-divider>
+</ng-template>

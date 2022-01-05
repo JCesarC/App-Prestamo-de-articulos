@@ -12,13 +12,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarPrestamoComponent } from './editar-prestamo/editar-prestamo.component';
 import { ConfirmarPrestamoComponent } from './confirmar-prestamo/confirmar-prestamo.component';
 import { ModalPrestamosComponent } from './modal-prestamos/modal-prestamos.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AllPrestamosComponent } from './all-prestamos/all-prestamos.component';
+import { ModalDetailsComponent } from './modal-details/modal-details.component';
+
 @NgModule({
   declarations: [
     PrestamosComponent,
     NuevoPrestamoComponent,
     EditarPrestamoComponent,
     ConfirmarPrestamoComponent,
-    ModalPrestamosComponent
+    ModalPrestamosComponent,
+    AllPrestamosComponent,
+    ModalDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -29,8 +35,7 @@ import { ModalPrestamosComponent } from './modal-prestamos/modal-prestamos.compo
     FormsModule,
     MatPaginatorModule,
     NgbModule,
-    
-    
+    SweetAlert2Module.forRoot(),
   ],
 })
-export class PrestamosModule { }
+export class PrestamosModule {}

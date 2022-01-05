@@ -1,10 +1,11 @@
+import { Articulo } from './articulo.interface';
 import { User } from './user.interface';
 
 export interface Prestamo {
   id: number;
   MatriculaCodigo: string;
   Nombres: string;
-  Estatus: boolean;
+  Estatus: string;
   createdAd: string;
   Fecha_prestamo: string;
   Hora: string;
@@ -12,10 +13,11 @@ export interface Prestamo {
   Fecha_devolucion: string;
   Comentarios: string;
   user: User;
-  articulosPrestamo: particulo[];
+  articulosPrestamo: pArticulo[];
 }
-export interface particulo {
+export interface pArticulo {
   id: number;
+  Articulo: Articulo;
   cantidad: number;
 }
 
@@ -24,4 +26,13 @@ export interface prestamoResponse {
   cantidadArticulos: string;
   userId: number;
   fecha_limite: string;
+  comentarios: string;
+}
+
+export interface prestamoUpdate {
+  articulosId: string;
+  cantidadArticulos: string;
+  Estatus: string;
+  Fecha_devolucion: string;
+  Comentarios: string;
 }

@@ -12,6 +12,13 @@ import { MaterialModule } from './material.module';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ModalPrestamosComponent } from './pages/prestamos/modal-prestamos/modal-prestamos.component';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  AppDateAdapter,
+  APP_DATE_FORMATS,
+} from './shared/components/format-datepicker';
+
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2'
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -23,9 +30,14 @@ import { ModalPrestamosComponent } from './pages/prestamos/modal-prestamos/modal
     MaterialModule,
     NgbModule,
     HttpClientModule,
+    SweetAlert2Module.forRoot()
   ],
-  providers: [NgbActiveModal],
+  providers: [
+    NgbActiveModal,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[ModalPrestamosComponent]
+  entryComponents: [ModalPrestamosComponent],
 })
 export class AppModule {}

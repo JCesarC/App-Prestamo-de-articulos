@@ -57,7 +57,7 @@
               <button
                 (click)="selectElement(element)"
                 mat-flat-button
-                color="accent"
+                color="primary"
               >
                 Seleccionar
               </button>
@@ -124,11 +124,11 @@
         <ng-container matColumnDef="Accion">
           <th mat-header-cell *matHeaderCellDef>Acción</th>
           <td mat-cell *matCellDef="let element">
-            <div class="table-button-row">
+            <div class="table-button-row" *ngIf="element.Stock >=1; else selectDisabled">
               <button
                 (click)="selectElement(element)"
                 mat-flat-button
-                color="accent"
+                color="primary"
               >
                 Seleccionar
               </button>
@@ -146,3 +146,9 @@
   </div>
   <div class="modal-footer"></div>
 </div>
+
+
+<ng-template #selectDisabled>
+
+  <button mat-raised-button disabled>Seleccionar</button>
+</ng-template>

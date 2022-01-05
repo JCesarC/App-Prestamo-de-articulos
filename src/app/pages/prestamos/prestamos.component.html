@@ -2,91 +2,31 @@
 <h2>Prestamos registrados</h2>
 <div class="container">
   <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a mat-tab-link (click)="activo = 'Prestamos'" [active]="activo == 'Prestamos'">Prestamos</a>
-    <a mat-tab-link (click)="activo = 'Nuevo'" [active]="activo == 'Nuevo'">Nuevo</a>
-    <a mat-tab-link (click)="activo = 'Editar'" [active]="activo == 'Editar'">Editar prestamo</a>
-    <a mat-tab-link (click)="activo = 'Confirmar'" [active]="activo == 'Confirmar'">Confirmar prestamo</a>
+    <a
+      mat-tab-link
+      (click)="activo = 'Prestamos'"
+      [active]="activo == 'Prestamos'"
+      >Prestamos</a
+    >
+    <a mat-tab-link (click)="activo = 'Nuevo'" [active]="activo == 'Nuevo'"
+      >Nuevo</a
+    >
+    <a mat-tab-link (click)="activo = 'Editar'" [active]="activo == 'Editar'"
+      >Editar prestamo</a
+    >
+    <a
+      mat-tab-link
+      (click)="activo = 'Confirmar'"
+      [active]="activo == 'Confirmar'"
+      >Confirmar prestamo</a
+    >
   </nav>
 </div>
 <div *ngIf="activo == 'Prestamos'">
-  <div class="search-div">
-    <mat-form-field class="search-form-field">
-      <input
-        matInput
-        [(ngModel)]="searchKey"
-        placeholder="Buscar"
-        autocomplete="off"
-        (keyup)="applyFilter()"
-      />
-      <button
-        mat-button
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        *ngIf="searchKey"
-        (click)="onSearchClear()"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
-  <div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>id.</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="Matricula">
-        <th mat-header-cell *matHeaderCellDef>Matricula</th>
-        <td mat-cell *matCellDef="let element">{{ element.MatriculaCodigo }}</td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="Nombres">
-        <th mat-header-cell *matHeaderCellDef>Nombres</th>
-        <td mat-cell *matCellDef="let element">{{ element.Nombres }}</td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="Estatus">
-        <th mat-header-cell *matHeaderCellDef>Estatus</th>
-        <td mat-cell *matCellDef="let element">{{ element.Estatus }}</td>
-      </ng-container>
-      
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="Fecha de prestamo">
-            <th mat-header-cell *matHeaderCellDef>Fecha de prestamo</th>
-            <td mat-cell *matCellDef="let element">{{ element.Fecha_prestamo }}</td>
-          </ng-container>
-      
-              <!-- Symbol Column -->
-      <ng-container matColumnDef="Fecha limite">
-        <th mat-header-cell *matHeaderCellDef>Fecha limite</th>
-        <td mat-cell *matCellDef="let element">{{ element.Fecha_limite }}</td>
-      </ng-container>
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="Detalles">
-            <th mat-header-cell *matHeaderCellDef>Detalles</th>
-            <td mat-cell *matCellDef="let element">Boton detalles</td>
-          </ng-container>
-
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="Accion">
-                      <th mat-header-cell *matHeaderCellDef>Accion</th>
-                      <td mat-cell *matCellDef="let element">Accion a hacer</td>
-                    </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
+  
 </div>
+
+<app-all-prestamos *ngIf="activo== 'Prestamos'"></app-all-prestamos>
 <app-nuevo-prestamo *ngIf="activo == 'Nuevo'"></app-nuevo-prestamo>
 <app-editar-prestamo *ngIf="activo == 'Editar'"></app-editar-prestamo>
 <app-confirmar-prestamo *ngIf="activo == 'Confirmar'"></app-confirmar-prestamo>

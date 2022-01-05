@@ -15,7 +15,9 @@ import { Articulo } from '@app/shared/models/articulo.interface';
 import { ArticuloService } from '@app/pages/articulos/articulo.service';
 import { UserService } from '@app/pages/usuarios/user.service';
 import { User } from '@app/shared/models/user.interface';
-
+import { PrestamoService } from '../prestamo.service';
+import { prestamoResponse } from '@app/shared/models/prestamo.interface';
+import Swal from 'sweetalert2';
 export interface Usuarios {
   name: string;
   position: number;
@@ -53,8 +55,14 @@ export class NuevoPrestamoComponent implements OnInit {
     disabled: true,
   });
 
+  date = new FormControl(new Date());
+
+
   userSearch: string = '';
   articuloSearch: string = '';
+  //date: string;
+
+
   userSelected: User = {
     id: 0,
     Nombres: '',
@@ -76,7 +84,8 @@ export class NuevoPrestamoComponent implements OnInit {
     public dialog: MatDialog,
     private artSvc: ArticuloService,
     private userSvc: UserService,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    public prestamoSvc: PrestamoService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -85,9 +94,9 @@ export class NuevoPrestamoComponent implements OnInit {
   dataUsers: User[];
   dataArticulos;
 
-  openScrollableContent(longContent) {
-    this.modalService.open(longContent, { scrollable: true });
-  }
+  // openScrollableContent(longContent) {
+  //   this.modalService.open(longContent, { scrollable: true });
+  // }
   // openDialog() {
   //   const dialogRef = this.dialog.open(ModalComponent);
 
@@ -105,6 +114,13 @@ export class NuevoPrestamoComponent implements OnInit {
     this.userSvc.getAll().subscribe((users) => {
       this.dataUsers = users;
     });
+  }
+
+  getDate(dateLimit:Date):string{
+  //let options = {day:'numeric', month:'numeric', year:'numeric'};
+    // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let dateConverted =  dateLimit.toLocaleDateString('en-GB');
+    return dateConverted
   }
 
   openModal(type: string) {
@@ -133,7 +149,7 @@ export class NuevoPrestamoComponent implements OnInit {
           const found = this.articulosArray.some((x) => x.id === result.id);
           if (!found) {
             this.articulosArray.push(result);
-          } 
+          }
         }
       });
     }
@@ -164,26 +180,70 @@ export class NuevoPrestamoComponent implements OnInit {
     }
   }
 
-  triggerModal(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (res) => {
-          this.closeModal = `Closed with: ${res}`;
-        },
-        (res) => {
-          this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
-        }
-      );
+  async savePrestamo() {
+    try {
+      let dataPrestamo: prestamoResponse = {
+        articulosId: this.getIdArticulos(),
+        cantidadArticulos: this.getCantidadArticulos(),
+        userId: this.userSelected.id,
+        fecha_limite: this.getDate(this.date.value),
+        comentarios: 'Primeros prestamos',
+      };
+      let res = await this.prestamoSvc.newPrestamo(dataPrestamo).toPromise();
+      console.log('-----', res);
+      if (res.message === 'Prestamo creado') {
+        this.showConfirmado('Prestamo guardado correctamente');
+        console.log(res);
+      } else {
+        this.showError('Algo ha salido mal');
+        console.log(res);
+      }
+    } catch (e) {
+      this.showError('Algo ha salido mal al guardar el prestamo');
+      console.log(e);
+      //console.log(res)
+    }
+    //this.showConfirmado('Guardado correctamente');
+  }
+  showConfirmado(text: string) {
+    Swal.fire({
+      icon: 'success',
+      title: text,
+      didClose: this.reloadPage,
+      showConfirmButton: true,
+    });
+  }
+  reloadPage() {
+    window.location.reload();
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  showError(text: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: text,
+    });
   }
+
+  getIdArticulos(): string {
+    let arrayArticulosIds = [];
+    for (let i = 0; i < this.articulosArray.length; i++) {
+      let id = this.articulosArray[i].id;
+      arrayArticulosIds.push(id);
+    }
+    let articulosIds = arrayArticulosIds.join();
+    return articulosIds;
+  }
+
+  getCantidadArticulos(): string {
+    let arrayCantArt = [];
+    for (const articulo of this.articulosArray) {
+      let cantidad = articulo.Cantidad;
+      arrayCantArt.push(cantidad);
+    }
+    let cantidadArticulos = arrayCantArt.join();
+    return cantidadArticulos;
+  }
+
+  
 }

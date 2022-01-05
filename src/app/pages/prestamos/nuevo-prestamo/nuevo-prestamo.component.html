@@ -21,11 +21,11 @@
         </button>
       </mat-form-field>
     </div>
-    
+
     <div class="content-form">
       <mat-form-field class="form-fields">
         <mat-label>Nombre</mat-label>
-    
+
         <input
           matInput
           [(ngModel)]="userSelected.Nombres"
@@ -34,7 +34,7 @@
       </mat-form-field>
       <mat-form-field class="form-fields">
         <mat-label>Apellidos</mat-label>
-    
+
         <input
           matInput
           [(ngModel)]="userSelected.Apellidos"
@@ -43,7 +43,7 @@
       </mat-form-field>
       <mat-form-field class="form-fields">
         <mat-label>Matricula</mat-label>
-    
+
         <input
           matInput
           [(ngModel)]="userSelected.MatriculaCodigo"
@@ -53,7 +53,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="row">
   <div class="col-md-8">
@@ -75,7 +74,6 @@
       </button>
     </mat-form-field>
   </div>
- 
 </div>
 <div class="row" *ngIf="articulosArray.length >= 1; else emptyArticulos">
   <div class="col-md-8">
@@ -108,22 +106,37 @@
   </div>
 </div>
 <br />
-<div>
-  <p>
-    <mat-form-field appearance="fill">
+
+<div class="row">
+  <div class="col-md-8">
+    <mat-form-field class="form-fields" appearance="fill">
       <mat-label>Fecha de devolucion</mat-label>
-      <input matInput [matDatepicker]="dp3" disabled />
+      <input matInput [matDatepicker]="dp3" [formControl]="date"/>
       <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
       <mat-datepicker #dp3 disabled="false"></mat-datepicker>
     </mat-form-field>
-  </p>
+  </div>
 </div>
 
 <br />
 <div class="btn-end">
-  <button type="button" class="btn btn-danger">Cancelar</button>
+  <button (click)="reloadPage()" type="button" class="btn btn-danger">Cancelar</button>
 
-  <button type="button" class="btn btn-success">Confirmar</button>
+  <button
+    [swal]="{
+      title: 'Confirmar prestamo',
+      text: '¿Estas seguro de guardar este prestamo?',
+      icon: 'warning',
+      confirmButtonText: 'Confirmar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'
+    }"
+    (confirm)="savePrestamo()"
+    type="button"
+    class="btn btn-success"
+  >
+    Confirmar
+  </button>
 </div>
 
 <br />
@@ -132,15 +145,10 @@
   <div class="row">
     <div class="col-md-8">
       <ul class="list-group">
-        <li
-         
-          class="list-group-item list-group-item-action"
-        >
-        <h2>Aún no se han agregado articulos</h2>
+        <li class="list-group-item list-group-item-action">
+          <h2>Aún no se han agregado articulos</h2>
         </li>
-       </ul>
+      </ul>
     </div>
   </div>
-  
- 
 </ng-template>

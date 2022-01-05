@@ -17,7 +17,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const myModules = [
   MatToolbarModule,
@@ -40,6 +41,7 @@ const myModules = [
   MatNativeDateModule,
   MatCheckboxModule,
   MatRadioModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
