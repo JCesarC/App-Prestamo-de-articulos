@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
   NgbModal,
   NgbModalConfig,
@@ -18,25 +18,6 @@ import { User } from '@app/shared/models/user.interface';
 import { PrestamoService } from '../prestamo.service';
 import { prestamoResponse } from '@app/shared/models/prestamo.interface';
 import Swal from 'sweetalert2';
-export interface Usuarios {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const Usuarios_DATA: Usuarios[] = [
-  { position: 1, name: 'Hydrogene', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
 
 @Component({
   selector: 'app-nuevo-prestamo',
@@ -57,11 +38,9 @@ export class NuevoPrestamoComponent implements OnInit {
 
   date = new FormControl(new Date());
 
-
   userSearch: string = '';
   articuloSearch: string = '';
   //date: string;
-
 
   userSelected: User = {
     id: 0,
@@ -71,12 +50,11 @@ export class NuevoPrestamoComponent implements OnInit {
     rol: undefined,
   };
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = [...Usuarios_DATA];
+  dataSource = new MatTableDataSource();
 
   articulosArray: Articulo[] = [];
 
-  @ViewChild(MatTable) table: MatTable<Usuarios>;
+  @ViewChild(MatTable) table: MatTable<User>;
 
   constructor(
     config: NgbModalConfig,
@@ -116,11 +94,11 @@ export class NuevoPrestamoComponent implements OnInit {
     });
   }
 
-  getDate(dateLimit:Date):string{
-  //let options = {day:'numeric', month:'numeric', year:'numeric'};
+  getDate(dateLimit: Date): string {
+    //let options = {day:'numeric', month:'numeric', year:'numeric'};
     // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    let dateConverted =  dateLimit.toLocaleDateString('en-GB');
-    return dateConverted
+    let dateConverted = dateLimit.toLocaleDateString('en-GB');
+    return dateConverted;
   }
 
   openModal(type: string) {
@@ -181,30 +159,77 @@ export class NuevoPrestamoComponent implements OnInit {
   }
 
   async savePrestamo() {
-    try {
-      let dataPrestamo: prestamoResponse = {
-        articulosId: this.getIdArticulos(),
-        cantidadArticulos: this.getCantidadArticulos(),
-        userId: this.userSelected.id,
-        fecha_limite: this.getDate(this.date.value),
-        comentarios: 'Primeros prestamos',
-      };
-      let res = await this.prestamoSvc.newPrestamo(dataPrestamo).toPromise();
-      console.log('-----', res);
-      if (res.message === 'Prestamo creado') {
-        this.showConfirmado('Prestamo guardado correctamente');
-        console.log(res);
-      } else {
-        this.showError('Algo ha salido mal');
-        console.log(res);
+    const error = this.validateErrors();
+    if (error === '') {
+      console.log('No hay errores');
+      try {
+        let dataPrestamo: prestamoResponse = {
+          articulosId: this.getIdArticulos(),
+          cantidadArticulos: this.getCantidadArticulos(),
+          userId: this.userSelected.id,
+          fecha_limite: this.getDate(this.date.value),
+          comentarios: 'Primeros prestamos',
+        };
+        let res = await this.prestamoSvc.newPrestamo(dataPrestamo).toPromise();
+        console.log('-----', res);
+        if (res.message === 'Prestamo creado') {
+          this.showConfirmado('Prestamo guardado correctamente');
+          console.log(res);
+        } else {
+          this.showError('Algo ha salido mal');
+          console.log(res);
+        }
+      } catch (e) {
+        this.showError('Algo ha salido mal al guardar el prestamo');
+        console.log(e);
+        //console.log(res)
       }
-    } catch (e) {
-      this.showError('Algo ha salido mal al guardar el prestamo');
-      console.log(e);
-      //console.log(res)
+    } else {
+      this.showErrors(error);
     }
+
     //this.showConfirmado('Guardado correctamente');
   }
+
+  validateErrors(): string {
+    let error = '';
+    const dateSelected = this.getDate(this.date.value);
+    let parts = dateSelected.split('/');
+    let today = this.getTodayDate();
+    let parts_today = today.split('/');
+
+    let date_selected = new Date(
+      parseInt(parts[2]),
+      parseInt(parts[1]) - 1,
+      parseInt(parts[0])
+    );
+    let date_today = new Date(
+      parseInt(parts_today[2]),
+      parseInt(parts_today[1]) - 1,
+      parseInt(parts_today[0])
+    );
+
+    if (date_selected.getTime() < date_today.getTime()) {
+      error = 'Por favor no selecciones una fecha anterior al dia de hoy';
+      return error;
+    }
+    if (this.userSelected.id === 0) {
+      error = 'No se ha seleccionado un usuario';
+      return error;
+    }
+    if (this.articulosArray.length < 1) {
+      error = 'No se han agregado articulos';
+      return error;
+    }
+    return error;
+  }
+
+  getTodayDate(): string {
+    let date = new Date();
+    let today = date.toLocaleDateString('en-GB');
+    return today;
+  }
+
   showConfirmado(text: string) {
     Swal.fire({
       icon: 'success',
@@ -221,6 +246,13 @@ export class NuevoPrestamoComponent implements OnInit {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
+      text: text,
+    });
+  }
+  showErrors(text: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Ha ocurrido el siguiente error:',
       text: text,
     });
   }
@@ -244,6 +276,4 @@ export class NuevoPrestamoComponent implements OnInit {
     let cantidadArticulos = arrayCantArt.join();
     return cantidadArticulos;
   }
-
-  
 }
