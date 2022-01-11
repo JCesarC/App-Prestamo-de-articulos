@@ -1,14 +1,28 @@
 .rol-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
-  
-  .rol-margin {
-    margin: 0 10px;
-  }
-  .form-registro{
-    width: 60%;
-    size: 10%;
-  }
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.rol-class{
+  margin: 20px;
+}
+.rol-margin {
+  margin: 0 10px;
+}
+.form-registro {
+  width: 90%;
+  size: 10%;
+}
+.btn-actions {
+  margin-right: 20px;
+}
+.btn-save {
+  float: right;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.inputData {
+  width: 100%;
+  margin: 20px;
+}

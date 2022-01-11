@@ -1,47 +1,47 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  Prestamo,
-  prestamoResponse,
-  prestamoUpdate,
-} from '@app/shared/models/prestamo.interface';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { Categoria } from '@app/shared/models/categoria.interface';
+
 @Injectable({
   providedIn: 'root',
 })
-export class PrestamoService {
+export class CategoriaService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Prestamo[]> {
+  getAll(): Observable<Categoria[]> {
     return this.http
-      .get<Prestamo[]>(`${environment.API_URL}/prestamos`)
+      .get<Categoria[]>(`${environment.API_URL}/categorias`)
       .pipe(catchError(this.handleError));
   }
 
-  getEstatus(): Observable<Prestamo[]> {
+  getById(id: number): Observable<Categoria> {
     return this.http
-      .get<Prestamo[]>(`${environment.API_URL}/prestamos/estatus`)
+      .get<Categoria>(`${environment.API_URL}/categorias/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {
+  newCategoria(dataCategoria: Categoria): Observable<any> {
     return this.http
-      .post<Prestamo>(`${environment.API_URL}/prestamos`, dataPrestamo)
+      .post<Categoria>(`${environment.API_URL}/categorias`, dataCategoria)
       .pipe(catchError(this.handleError));
   }
 
-  confirmarPrestamo(id: number, dataPrestamo: prestamoUpdate) {
+  updateCategoria(id: number, dataCategoria: Categoria): Observable<any> {
     return this.http
-      .patch<any>(`${environment.API_URL}/prestamos/${id}`, dataPrestamo)
+      .patch<Categoria>(
+        `${environment.API_URL}/categorias/${id}`,
+        dataCategoria
+      )
       .pipe(catchError(this.handleError));
   }
 
-  deletePrestamo(id: number): Observable<{}> {
+  deleteCategoria(id: number): Observable<{}> {
     return this.http
-      .delete<Prestamo>(`${environment.API_URL}/prestamos/${id}`)
+      .delete<Categoria>(`${environment.API_URL}/categorias/${id}`)
       .pipe(catchError(this.handleError));
   }
 

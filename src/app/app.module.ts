@@ -19,6 +19,7 @@ import {
 } from './shared/components/format-datepicker';
 
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -30,6 +31,8 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2'
     MaterialModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     SweetAlert2Module.forRoot()
   ],
   providers: [

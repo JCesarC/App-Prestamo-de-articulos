@@ -1,4 +1,4 @@
-export interface rol{
+export interface Rol{
     id:number;
     rol:string;
 }

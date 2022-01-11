@@ -9,13 +9,17 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
-
+import { AllUsuariosComponent } from './all-usuarios/all-usuarios.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ModalEditComponent } from './modal-edit/modal-edit.component';
 
 @NgModule({
   declarations: [
     UsuariosComponent,
     EditarUsuarioComponent,
-    NuevoUsuarioComponent
+    NuevoUsuarioComponent,
+    AllUsuariosComponent,
+    ModalEditComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,8 @@ import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
     MatSortModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot(),
+  ],
 })
-export class UsuariosModule { }
+export class UsuariosModule {}

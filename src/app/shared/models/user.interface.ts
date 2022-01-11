@@ -1,17 +1,17 @@
-import { rol } from "./rol.interface";
+import { Rol } from "./rol.interface";
 
 export interface User{
     id:number;
     Nombres:string;
     Apellidos:string;
     MatriculaCodigo:string;
-    rol:rol
+    rol:Rol
 }
 
 export interface userResponse{
     
-    Nombres:string;
-    Apellidos:string;
-    MatriculaCodigo:string;
-    rol:rol;
+    nombres:string;
+    apellidos:string;
+    matriculaCodigo:string;
+    rol:Rol;
 }

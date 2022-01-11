@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -8,6 +9,7 @@ import {
   prestamoUpdate,
 } from '@app/shared/models/prestamo.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { forkJoin, Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ModalDetailsComponent } from '../modal-details/modal-details.component';
 import { PrestamoService } from '../prestamo.service';
@@ -18,6 +20,8 @@ import { PrestamoService } from '../prestamo.service';
   styleUrls: ['./all-prestamos.component.scss'],
 })
 export class AllPrestamosComponent implements OnInit, AfterViewInit {
+  isLoading = true;
+  mode: ProgressSpinnerMode = 'indeterminate';
   searchKey: string;
   color = 'blue';
   displayedColumns: string[] = [
@@ -40,19 +44,56 @@ export class AllPrestamosComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal
   ) {
     // Create 100 users
-    const prestamos = this.prestamoSvc.getAll().subscribe((dataPrestamos) => {
-      this.dataSource = new MatTableDataSource(dataPrestamos);
-      this.Sort();
-    });
-
+    // const prestamos = this.prestamoSvc.getAll().subscribe((dataPrestamos) => {
+    //   this.dataSource = new MatTableDataSource(dataPrestamos);
+    //   this.Sort();
+    // });
     // Assign the data to the data source for the table to render
     // this.dataSource = new MatTableDataSource(users);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    forkJoin([this.updateEstatus(), this.getAllData()]).subscribe(([x, y]) => {
+      console.log(x);
+      console.log('Exectuded 2 consults');
+      this.isLoading = true;
+      if (y) {
+        this.dataSource = new MatTableDataSource(y);
+        this.Sort();
+        this.isLoading = false;
+        console.log('Estatus changed');
+      }
+    });
+    // this.updateEstatus();
+    // this.getData();
+  }
 
-  ngAfterViewInit() {
-    this.Sort();
+  ngAfterViewInit() {}
+  // let res = await this.prestamoSvc
+  //     .confirmarPrestamo(element.id, dataPrestamo)
+  //     .toPromise();
+
+  updateEstatus(): Observable<any> {
+    // let res = this.prestamoSvc.getEstatus().toPromise();
+    return this.prestamoSvc.getEstatus();
+  }
+
+  getAllData() {
+    return this.prestamoSvc.getAll();
+  }
+
+  async getData() {
+    this.isLoading = true;
+    console.log('setted true');
+    let res = await this.prestamoSvc.getAll().toPromise();
+
+    if (res) {
+      this.dataSource = new MatTableDataSource(res);
+      this.isLoading = false;
+      this.Sort();
+
+      console.log('Estatus changed');
+    }
   }
 
   Sort() {

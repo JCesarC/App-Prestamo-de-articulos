@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  Prestamo,
-  prestamoResponse,
-  prestamoUpdate,
-} from '@app/shared/models/prestamo.interface';
+import { Rol, rolResponse } from '@app/shared/models/rol.interface';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -12,36 +8,36 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class PrestamoService {
+export class RolService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Prestamo[]> {
+  getAll(): Observable<Rol[]> {
     return this.http
-      .get<Prestamo[]>(`${environment.API_URL}/prestamos`)
+      .get<Rol[]>(`${environment.API_URL}/rol`)
       .pipe(catchError(this.handleError));
   }
 
-  getEstatus(): Observable<Prestamo[]> {
+  newRol(dataRol: rolResponse): Observable<any> {
     return this.http
-      .get<Prestamo[]>(`${environment.API_URL}/prestamos/estatus`)
+      .post<Rol>(`${environment.API_URL}/rol`, dataRol)
       .pipe(catchError(this.handleError));
   }
 
-  newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {
+  getById(id: number): Observable<Rol> {
     return this.http
-      .post<Prestamo>(`${environment.API_URL}/prestamos`, dataPrestamo)
+      .get<Rol>(`${environment.API_URL}/rol/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  confirmarPrestamo(id: number, dataPrestamo: prestamoUpdate) {
+  updateRol(id: number, dataRol: Rol): Observable<any> {
     return this.http
-      .patch<any>(`${environment.API_URL}/prestamos/${id}`, dataPrestamo)
+      .patch<Rol>(`${environment.API_URL}/rol/${id}`, dataRol)
       .pipe(catchError(this.handleError));
   }
 
-  deletePrestamo(id: number): Observable<{}> {
+  deleteRol(id: number): Observable<{}> {
     return this.http
-      .delete<Prestamo>(`${environment.API_URL}/prestamos/${id}`)
+      .delete<Rol>(`${environment.API_URL}/rol/${id}`)
       .pipe(catchError(this.handleError));
   }
 
