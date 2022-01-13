@@ -1,145 +1,150 @@
-<h1>Nuevo prestamo de articulos</h1>
-<div class="row">
-  <div class="col-md-8">
-    <div class="search-div">
-      <mat-form-field class="form-fields" appearance="fill">
-        <mat-label>Buscar usuario</mat-label>
-        <input
-          matInput
-          [(ngModel)]="userSearch"
-          autocomplete="off"
-          (keyup.enter)="openModal('users')"
-        />
-        <button
-          mat-button
-          matSuffix
-          mat-stroked-button
-          aria-label="search"
-          (click)="openModal('users')"
-        >
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
+<mat-card>
+  <h1>Nuevo prestamo de articulos</h1>
+  <mat-divider></mat-divider>
+  <br />
 
-    <div class="content-form">
-      <mat-form-field class="form-fields">
-        <mat-label>Nombre</mat-label>
-
-        <input
-          matInput
-          [(ngModel)]="userSelected.Nombres"
-          [formControl]="inputUsuario"
-        />
-      </mat-form-field>
-      <mat-form-field class="form-fields">
-        <mat-label>Apellidos</mat-label>
-
-        <input
-          matInput
-          [(ngModel)]="userSelected.Apellidos"
-          [formControl]="inputApellidos"
-        />
-      </mat-form-field>
-      <mat-form-field class="form-fields">
-        <mat-label>Matricula</mat-label>
-
-        <input
-          matInput
-          [(ngModel)]="userSelected.MatriculaCodigo"
-          [formControl]="inputMatricula"
-        />
-      </mat-form-field>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-8">
+  <div class="inputData">
     <mat-form-field class="form-fields" appearance="fill">
-      <mat-label>Buscar articulo</mat-label>
+      <mat-label>Buscar usuario</mat-label>
       <input
         matInput
-        [(ngModel)]="articuloSearch"
-        (keyup.enter)="openModal('articulos')"
+        [(ngModel)]="userSearch"
+        autocomplete="off"
+        (keyup.enter)="openModal('users')"
       />
       <button
         mat-button
         matSuffix
         mat-stroked-button
         aria-label="search"
-        (click)="openModal('articulos')"
+        (click)="openModal('users')"
       >
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
   </div>
-</div>
-<div class="row" *ngIf="articulosArray.length >= 1; else emptyArticulos">
-  <div class="col-md-8">
-    <ul class="list-group">
-      <li
-        *ngFor="let articulo of articulosArray"
-        class="list-group-item list-group-item-action"
-      >
-        <div class="articulos-title">
-          <button
-            mat-button
-            class="operation-button"
-            (click)="addArticulo(articulo)"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
-          <button
-            mat-button
-            class="operation-button"
-            (click)="removeArticulo(articulo)"
-          >
-            <mat-icon>remove</mat-icon>
-          </button>
 
-          <span class="badge badge-primary"> {{ articulo.Cantidad }}</span>
-          {{ articulo.Descripcion }}
-        </div>
-      </li>
-    </ul>
+  <div class="inputData">
+    <mat-form-field class="form-fields">
+      <mat-label>Nombre</mat-label>
+
+      <input
+        matInput
+        [(ngModel)]="userSelected.Nombres"
+        [formControl]="inputUsuario"
+      />
+    </mat-form-field>
+    <mat-form-field class="form-fields">
+      <mat-label>Apellidos</mat-label>
+
+      <input
+        matInput
+        [(ngModel)]="userSelected.Apellidos"
+        [formControl]="inputApellidos"
+      />
+    </mat-form-field>
+    <mat-form-field class="form-fields">
+      <mat-label>Matricula o Codigo</mat-label>
+
+      <input
+        matInput
+        [(ngModel)]="userSelected.MatriculaCodigo"
+        [formControl]="inputMatricula"
+      />
+    </mat-form-field>
   </div>
-</div>
-<br />
 
-<div class="row">
-  <div class="col-md-8">
+  <mat-divider> </mat-divider>
+  <br />
+<div class="inputData">
+  <mat-form-field class="form-fields" appearance="fill">
+    <mat-label>Buscar articulo</mat-label>
+    <input
+      matInput
+      [(ngModel)]="articuloSearch"
+      (keyup.enter)="openModal('articulos')"
+    />
+    <button
+      mat-button
+      matSuffix
+      mat-stroked-button
+      aria-label="search"
+      (click)="openModal('articulos')"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+  <div class="inputData">
+    <div class="listArticulos" *ngIf="articulosArray.length >= 1; else emptyArticulos">
+      <ul class="list-group">
+        <li
+          *ngFor="let articulo of articulosArray"
+          class="list-group-item list-group-item-action"
+        >
+          <div class="articulos-title">
+            <button
+              mat-button
+              class="operation-button"
+              (click)="addArticulo(articulo)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <button
+              mat-button
+              class="operation-button"
+              (click)="removeArticulo(articulo)"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+  
+            <span class="badge badge-primary"> {{ articulo.Cantidad }}</span>
+            {{ articulo.Descripcion }}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <br />
+  <div class="inputData">
     <mat-form-field class="form-fields" appearance="fill">
       <mat-label>Fecha de devolucion</mat-label>
-      <input matInput [matDatepicker]="dp3" [formControl]="date"/>
+      <input matInput [matDatepicker]="dp3" [formControl]="date" />
       <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
       <mat-datepicker #dp3 disabled="false"></mat-datepicker>
     </mat-form-field>
   </div>
-</div>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="btn-actions">
+    <button (click)="reloadPage()" type="button" class="btn btn-danger">
+      Cancelar
+    </button>
+
+    <button
+      [swal]="{
+        title: 'Confirmar prestamo',
+        text: '¿Estas seguro de guardar este prestamo?',
+        icon: 'warning',
+        confirmButtonText: 'Confirmar',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar'
+      }"
+      (confirm)="savePrestamo()"
+      mat-raised-button
+      color="primary"
+      type="button"
+      class="btn-save"
+    >
+      Confirmar
+    </button>
+  </div>
+</mat-card>
 
 <br />
-<div class="btn-end">
-  <button (click)="reloadPage()" type="button" class="btn btn-danger">Cancelar</button>
 
-  <button
-    [swal]="{
-      title: 'Confirmar prestamo',
-      text: '¿Estas seguro de guardar este prestamo?',
-      icon: 'warning',
-      confirmButtonText: 'Confirmar',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar'
-    }"
-    (confirm)="savePrestamo()"
-    type="button"
-    class="btn btn-success"
-  >
-    Confirmar
-  </button>
-</div>
-
-<br />
 
 <ng-template #emptyArticulos>
   <div class="row">

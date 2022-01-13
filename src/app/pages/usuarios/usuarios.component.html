@@ -1,28 +1,20 @@
 <h1>Control de Usuarios</h1>
-<h2>Usuarios registados</h2>
+<mat-divider></mat-divider>
 
 <div class="container">
   <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a
+    <a style="text-decoration:none" 
       mat-tab-link
-      (click)="activo = 'Usuarios'"
-      [active]="activo == 'Usuarios'"
-      >Usuarios</a
-    >
-    <a mat-tab-link (click)="activo = 'Nuevo'" [active]="activo == 'Nuevo'"
-      >Nuevo</a
-    >
-    <a
-      mat-tab-link
-      disabled
-      (click)="activo = 'Editar'"
-      [active]="activo == 'Editar'"
-      >Editar Usuario</a
-    >
+      *ngFor="let link of links"
+      (click)="activo = link"
+      [active]="activo == link"
+      >{{ link }}
+    </a>
   </nav>
 </div>
 
-
-<app-all-usuarios *ngIf="activo=='Usuarios'"></app-all-usuarios>
+<app-all-usuarios *ngIf="activo == 'Usuarios'"></app-all-usuarios>
 <app-nuevo-usuario *ngIf="activo == 'Nuevo'"></app-nuevo-usuario>
-<app-editar-usuario *ngIf="activo == 'Editar'"></app-editar-usuario>
+<app-operaciones-usuario
+  *ngIf="activo == 'Operaciones'"
+></app-operaciones-usuario>

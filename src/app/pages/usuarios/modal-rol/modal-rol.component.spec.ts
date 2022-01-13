@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditarPrestamoComponent } from './editar-prestamo.component';
+import { ModalRolComponent } from './modal-rol.component';
 
-describe('EditarPrestamoComponent', () => {
-  let component: EditarPrestamoComponent;
-  let fixture: ComponentFixture<EditarPrestamoComponent>;
+describe('ModalRolComponent', () => {
+  let component: ModalRolComponent;
+  let fixture: ComponentFixture<ModalRolComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditarPrestamoComponent ]
+      declarations: [ ModalRolComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditarPrestamoComponent);
+    fixture = TestBed.createComponent(ModalRolComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

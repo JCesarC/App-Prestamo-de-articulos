@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h1>Actualizar Rol</h1>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="moda-body">
+  <mat-card >
+    <form autocomplete="off" [name]="rolInfo" [formGroup]="rolInfo">
+      <div class="inputData">
+        <mat-form-field class="form-rol">
+          <input
+            type="text"
+            formControlName="rolDescripcion"
+            matInput
+            placeholder="Descripcion del rol"
+          />
+          <mat-error *ngIf="rolInfo.get('rolDescripcion').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error *ngIf="rolInfo.get('rolDescripcion').hasError('minlength')"
+            >Se requieren minimo 5 caracteres en este campo</mat-error
+          >
+          <mat-error *ngIf="rolInfo.get('rolDescripcion').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
+        </mat-form-field>
+      </div>
+      
+    </form>
+  </mat-card>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss()">
+        Cancelar
+      </button>
+      <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!rolInfo.valid"
+      class="btn-save"
+      [swal]="{
+        title: 'Actualizar rol',
+        text: '¿Estás seguro de actualizar los datos del rol?',
+        icon: 'warning',
+        confirmButtonText: 'Actualizar',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar'
+      }"
+      (confirm)="updateRol()"
+    >
+      Actualizar
+    </button>
+</div>

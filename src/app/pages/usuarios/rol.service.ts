@@ -29,13 +29,13 @@ export class RolService {
       .pipe(catchError(this.handleError));
   }
 
-  updateRol(id: number, dataRol: Rol): Observable<any> {
+  updateRol(id: number, dataRol: rolResponse): Observable<any> {
     return this.http
       .patch<Rol>(`${environment.API_URL}/rol/${id}`, dataRol)
       .pipe(catchError(this.handleError));
   }
 
-  deleteRol(id: number): Observable<{}> {
+  deleteRol(id: number): Observable<any> {
     return this.http
       .delete<Rol>(`${environment.API_URL}/rol/${id}`)
       .pipe(catchError(this.handleError));

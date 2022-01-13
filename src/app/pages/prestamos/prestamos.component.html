@@ -1,32 +1,18 @@
 <h1>Prestamo de articulos</h1>
 <h2>Prestamos registrados</h2>
+
 <div class="container">
   <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a
+    <a style="text-decoration:none" 
       mat-tab-link
-      (click)="activo = 'Prestamos'"
-      [active]="activo == 'Prestamos'"
-      >Prestamos</a
-    >
-    <a mat-tab-link (click)="activo = 'Nuevo'" [active]="activo == 'Nuevo'"
-      >Nuevo</a
-    >
-    <a mat-tab-link (click)="activo = 'Editar'" [active]="activo == 'Editar'"
-      >Editar prestamo</a
-    >
-    <a
-      mat-tab-link
-      (click)="activo = 'Confirmar'"
-      [active]="activo == 'Confirmar'"
-      >Confirmar prestamo</a
-    >
+      *ngFor="let link of links"
+      (click)="activo = link"
+      [active]="activo == link"
+      >{{ link }}
+    </a>
   </nav>
 </div>
-<div *ngIf="activo == 'Prestamos'">
-  
-</div>
+
 
 <app-all-prestamos *ngIf="activo== 'Prestamos'"></app-all-prestamos>
 <app-nuevo-prestamo *ngIf="activo == 'Nuevo'"></app-nuevo-prestamo>
-<app-editar-prestamo *ngIf="activo == 'Editar'"></app-editar-prestamo>
-<app-confirmar-prestamo *ngIf="activo == 'Confirmar'"></app-confirmar-prestamo>

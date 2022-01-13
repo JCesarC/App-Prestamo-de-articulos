@@ -5,7 +5,7 @@
     <mat-divider></mat-divider>
     <div class="rol-class">
       <span>Seleccione el Rol del usuario</span>
-      <section class="rol-section">
+      <section class="rol-section" *ngIf="dataRol.length>=1;else emptyRols">
         <mat-radio-group [(ngModel)]="rol">
           <mat-radio-button
             *ngFor="let item of dataRol"
@@ -15,6 +15,13 @@
           </mat-radio-button>
         </mat-radio-group>
       </section>
+      <ng-template #emptyRols>
+        <p>
+          <ngb-alert [dismissible]="false">
+            <strong>No se han agregado roles. </strong> Agregalos desde el apartado de operaciones.
+          </ngb-alert>
+        </p>
+      </ng-template>
      
     </div>
 
@@ -29,6 +36,9 @@
           />
           <mat-error *ngIf="userInfo.get('userMatricula').hasError('required')"
             >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error *ngIf="userInfo.get('userMatricula').hasError('emptyRols')"
+            >No hay roles disponibles para asignar</mat-error
           >
           <mat-error *ngIf="userInfo.get('userMatricula').hasError('minlength')"
             >Se requieren minimo 5 caracteres en este campo</mat-error
@@ -101,7 +111,7 @@
           (confirm)="saveUser()"
           mat-raised-button
           color="primary"
-          [disabled]="!userInfo.valid"
+          [disabled]="!userInfo.valid || dataRol.length<1"
           class="btn-save"
         >
           Guardar

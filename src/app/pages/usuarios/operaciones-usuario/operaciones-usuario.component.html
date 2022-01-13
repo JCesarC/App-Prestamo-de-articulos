@@ -1,0 +1,109 @@
+<mat-accordion multi class="headers-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Rols </mat-panel-title>
+      <mat-panel-description
+        >Detalles de los roles registrados <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-template #emptyRol>
+     
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <h2>Aún no se han agregado roles al sistema</h2>
+            </li>
+          </ul>
+ 
+
+    </ng-template>
+
+    <div class="row" >
+      <div class="col-md-12">
+        <ul class="list-group" *ngIf="rolsArray.length >= 1; else emptyRol">
+          <li 
+            class="list-group-item list-group-item-action"
+            *ngFor="let rol of rolsArray"
+          >
+            <div class="rols-title">
+              <button mat-button class="operation-button" (click)="editRol(rol)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-button color="warn"
+                class="operation-button"
+                [swal]="{
+                  title: 'Eliminar rol',
+                  text: '¿Estás seguro eliminar el rol: '+rol.rol+'?',
+                  icon: 'warning',
+                  confirmButtonText: 'eliminar',
+                  showCancelButton: true,
+                  cancelButtonText: 'Cancelar'
+                }"
+                (confirm)="deleteRol(rol)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              {{rol.rol}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Nuevo Rol </mat-panel-title>
+      <mat-panel-description
+        >Registrar nuevo rol en el sistema <mat-icon>add</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <form autocomplete="off" [name]="rolInfo" [formGroup]="rolInfo">
+        <div class="inputData">
+          <mat-form-field class="form-rol">
+            <input
+              type="text"
+              formControlName="rolDescripcion"
+              matInput
+              placeholder="Descripcion del rol"
+            />
+            <mat-error
+              *ngIf="rolInfo.get('rolDescripcion').hasError('required')"
+              >Es necesario rellenar este campo</mat-error
+            >
+            <mat-error
+              *ngIf="rolInfo.get('rolDescripcion').hasError('minlength')"
+              >Se requieren minimo 5 caracteres en este campo</mat-error
+            >
+            <mat-error
+              *ngIf="rolInfo.get('rolDescripcion').hasError('maxlength')"
+              >Se alcanzó el limite de caracteres permitidos para este
+              campo</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="btn-actions"></div>
+      </form>
+    </div>
+    <mat-action-row>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!rolInfo.valid"
+        class="btn-save"
+        [swal]="{
+          title: 'Registro de nuevo rol',
+          text: '¿Estás seguro de crear un nuevo rol?',
+          icon: 'warning',
+          confirmButtonText: 'Confirmar',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }"
+        (confirm)="saveRol()"
+      >
+        Guardar
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

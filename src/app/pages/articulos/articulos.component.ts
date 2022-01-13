@@ -22,7 +22,8 @@ export interface PeriodicElement {
   styleUrls: ['./articulos.component.scss']
 })
 export class ArticulosComponent implements OnInit, AfterViewInit {
-  activo = 'Articulos';
+  links=['Articulos', 'Nuevo', 'Operaciones']
+  activo = this.links[0];
 
   searchKey:string;
   construcsearchKey:string;

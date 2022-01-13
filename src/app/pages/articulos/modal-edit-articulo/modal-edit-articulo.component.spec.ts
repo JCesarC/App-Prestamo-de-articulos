@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmarPrestamoComponent } from './confirmar-prestamo.component';
+import { ModalEditArticuloComponent } from './modal-edit-articulo.component';
 
-describe('ConfirmarPrestamoComponent', () => {
-  let component: ConfirmarPrestamoComponent;
-  let fixture: ComponentFixture<ConfirmarPrestamoComponent>;
+describe('ModalEditArticuloComponent', () => {
+  let component: ModalEditArticuloComponent;
+  let fixture: ComponentFixture<ModalEditArticuloComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmarPrestamoComponent ]
+      declarations: [ ModalEditArticuloComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmarPrestamoComponent);
+    fixture = TestBed.createComponent(ModalEditArticuloComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

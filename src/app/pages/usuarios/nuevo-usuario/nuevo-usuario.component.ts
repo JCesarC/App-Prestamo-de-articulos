@@ -1,10 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Rol } from '@app/shared/models/rol.interface';
 import { RolService } from '../rol.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 
-import {userResponse } from '@app/shared/models/user.interface';
+import { userResponse } from '@app/shared/models/user.interface';
 import { UserService } from '../user.service';
 
 @Component({
@@ -13,7 +20,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./nuevo-usuario.component.scss'],
 })
 export class NuevoUsuarioComponent implements OnInit {
-  dataRol: Rol[];
+  dataRol: Rol[] = [];
   rol: string;
   constructor(
     private rolSvc: RolService,
@@ -50,7 +57,18 @@ export class NuevoUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataRol();
+  
   }
+
+  public validRols() {
+    return (control: FormControl) => {
+      if (this.dataRol.length === 0) {
+        return { emptyRols: 'not rols' };
+      }
+      return null;
+    };
+  }
+
   async getDataRol() {
     let result = await this.rolSvc.getAll().toPromise();
 
@@ -99,3 +117,4 @@ export class NuevoUsuarioComponent implements OnInit {
     window.location.reload();
   }
 }
+

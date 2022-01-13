@@ -22,7 +22,8 @@ export interface PeriodicElement {
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  activo = 'Usuarios';
+  links = ['Usuarios', 'Nuevo', 'Operaciones']
+  activo = this.links[0];
 
   constructor() { }
 

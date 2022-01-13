@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,7 +19,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './modal-prestamos.component.html',
   styleUrls: ['./modal-prestamos.component.scss'],
 })
-export class ModalPrestamosComponent implements OnInit {
+export class ModalPrestamosComponent implements OnInit, AfterViewInit {
   @Input() public data;
   @Input() public type: string;
   @Input() public search: string;
@@ -42,6 +49,10 @@ export class ModalPrestamosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public activeModal: NgbActiveModal) {}
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort=this.sort;
+  }
 
   ngOnInit(): void {
     this.showElements();
@@ -73,7 +84,6 @@ export class ModalPrestamosComponent implements OnInit {
   applyFilter() {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
-
 
   // selectArticulos() {
   //   this.dataSource = this.data?.arrayArticulos;

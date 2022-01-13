@@ -14,6 +14,9 @@ import { Prestamo } from '@app/shared/models/prestamo.interface';
   styleUrls: ['./prestamos.component.scss'],
 })
 export class PrestamosComponent implements OnInit, AfterViewInit {
+
+  links = ['Prestamos', 'Nuevo'];
+  activo = this.links[0]
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
@@ -21,8 +24,6 @@ export class PrestamosComponent implements OnInit, AfterViewInit {
     // throw new Error('Method not implemented.');
   }
 
-
-  activo = 'Prestamos';
 
   
 }
