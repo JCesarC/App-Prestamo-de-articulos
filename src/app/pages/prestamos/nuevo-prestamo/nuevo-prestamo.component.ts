@@ -31,6 +31,7 @@ export class NuevoPrestamoComponent implements OnInit {
   closeModal: string;
   inputUsuario = new FormControl({ value: '', disabled: true });
   inputApellidos = new FormControl({ value: '', disabled: true });
+  inputComentarios = new FormControl();
   inputMatricula = new FormControl({
     value: '',
     disabled: true,
@@ -168,7 +169,7 @@ export class NuevoPrestamoComponent implements OnInit {
           cantidadArticulos: this.getCantidadArticulos(),
           userId: this.userSelected.id,
           fecha_limite: this.getDate(this.date.value),
-          comentarios: 'Primeros prestamos',
+          comentarios: this.inputComentarios.value,
         };
         let res = await this.prestamoSvc.newPrestamo(dataPrestamo).toPromise();
         console.log('-----', res);

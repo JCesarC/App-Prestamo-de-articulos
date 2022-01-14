@@ -50,8 +50,7 @@ export class ModalPrestamosComponent implements OnInit, AfterViewInit {
 
   constructor(public activeModal: NgbActiveModal) {}
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort=this.sort;
+   
   }
 
   ngOnInit(): void {

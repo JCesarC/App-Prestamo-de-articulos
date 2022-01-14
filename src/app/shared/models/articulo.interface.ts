@@ -15,4 +15,5 @@ export interface ArticuloResponse {
   Estatus: string;
   Codigo: string;
   Stock: number;
+  Categoria: Categoria;
 }

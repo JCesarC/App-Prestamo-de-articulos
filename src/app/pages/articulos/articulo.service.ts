@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 
-import { Articulo } from '@app/shared/models/articulo.interface';
+import { Articulo, ArticuloResponse } from '@app/shared/models/articulo.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,19 +24,19 @@ export class ArticuloService {
       .pipe(catchError(this.handleError));
   }
 
-  newArticulo(dataArticulo: Articulo): Observable<any> {
+  newArticulo(dataArticulo: ArticuloResponse): Observable<any> {
     return this.http
       .post<Articulo>(`${environment.API_URL}/articulos`, dataArticulo)
       .pipe(catchError(this.handleError));
   }
 
-  updateArticulo(id: number, dataArticulo: Articulo): Observable<any> {
+  updateArticulo(id: number, dataArticulo: ArticuloResponse): Observable<any> {
     return this.http
       .patch<Articulo>(`${environment.API_URL}/articulos/${id}`, dataArticulo)
       .pipe(catchError(this.handleError));
   }
 
-  deleteArticulo(id: number): Observable<{}> {
+  deleteArticulo(id: number): Observable<any> {
     return this.http
       .delete<Articulo>(`${environment.API_URL}/articulos/${id}`)
       .pipe(catchError(this.handleError));

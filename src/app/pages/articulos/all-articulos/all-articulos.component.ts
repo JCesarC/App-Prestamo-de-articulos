@@ -6,7 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Articulo } from 'api-lab/src/entity/Articulos';
 import { ArticuloService } from '../articulo.service';
 import Swal from 'sweetalert2';
-
+import { CategoriaService } from '../categoria.service';
+import { ModalEditArticuloComponent } from '../modal-edit-articulo/modal-edit-articulo.component';
+import { ArticuloResponse } from '@app/shared/models/articulo.interface';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-all-articulos',
@@ -21,7 +24,7 @@ export class AllArticulosComponent implements OnInit, AfterViewInit {
     'Estatus',
     'Codigo',
     'Stock',
-    'Accion'
+    'Accion',
   ];
   dataSource = new MatTableDataSource();
   searchKey: string;
@@ -29,11 +32,16 @@ export class AllArticulosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private artSvc: ArticuloService, public modalSvc: NgbModal) {
-    this.artSvc.getAll().subscribe((dataArticulos) =>{
+  constructor(
+    private artSvc: ArticuloService,
+    public modalService: NgbModal,
+    private catSvc: CategoriaService,
+    public dialog: MatDialog
+  ) {
+    this.artSvc.getAll().subscribe((dataArticulos) => {
       this.dataSource = new MatTableDataSource(dataArticulos);
-      this.Sort()
-    })
+      this.Sort();
+    });
   }
 
   ngOnInit(): void {}
@@ -42,7 +50,7 @@ export class AllArticulosComponent implements OnInit, AfterViewInit {
     this.Sort();
   }
 
-  Sort(){
+  Sort() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
@@ -61,12 +69,45 @@ export class AllArticulosComponent implements OnInit, AfterViewInit {
     this.searchKey = '';
     this.applyFilter();
   }
-  editModal(element:Articulo){
+  async editModal(element: Articulo) {
+    let categorias = await this.catSvc.getAll().toPromise();
+    console.log(categorias);
+    if (categorias) {
+      const dialogRef = this.dialog.open(ModalEditArticuloComponent, {
+        data: { dataArticulo: element, categorias: categorias },
+      });
 
+      dialogRef.afterClosed().subscribe(async (result: ArticuloResponse) => {
+        if (result) {
+          console.log('devuelto......');
+          console.log(result);
+          let res = await this.artSvc
+            .updateArticulo(element.id, result)
+            .toPromise();
+          if (res) {
+            this.showConfirmado(res.message);
+          }
+        }
+      });
+    }
   }
-  deleteArticulo(element:Articulo){
-    
+  async deleteArticulo(element: Articulo) {
+    let res = await this.artSvc.deleteArticulo(element.id).toPromise();
+    if(res){
+      console.log(res);
+      this.showConfirmado(res.message);
+    }
   }
 
-
+  showConfirmado(text: string) {
+    Swal.fire({
+      icon: 'success',
+      title: text,
+      didClose: this.reloadPage,
+      showConfirmButton: true,
+    });
+  }
+  reloadPage() {
+    window.location.reload();
+  }
 }

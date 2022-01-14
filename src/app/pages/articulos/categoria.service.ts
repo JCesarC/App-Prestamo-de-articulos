@@ -4,7 +4,7 @@ import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Categoria } from '@app/shared/models/categoria.interface';
+import { Categoria, CategoriaResponse } from '@app/shared/models/categoria.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class CategoriaService {
       .pipe(catchError(this.handleError));
   }
 
-  updateCategoria(id: number, dataCategoria: Categoria): Observable<any> {
+  updateCategoria(id: number, dataCategoria: CategoriaResponse): Observable<any> {
     return this.http
       .patch<Categoria>(
         `${environment.API_URL}/categorias/${id}`,

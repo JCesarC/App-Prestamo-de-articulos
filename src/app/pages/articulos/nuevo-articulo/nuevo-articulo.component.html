@@ -1,26 +1,142 @@
-<h1>Registrar nuevo articulo</h1>
-<br>
-<div>
-    <p>
-        <mat-form-field class="form-registro">
-          <mat-label>Descripción o nombre del articulo</mat-label>
-          <input matInput />
+<mat-card>
+  <br />
+  <h1>Registrar nuevo Articulo</h1>
+  <mat-divider></mat-divider>
+  <br />
+  
+    <form autocomplete="off" [name]="articuloInfo" [formGroup]="articuloInfo">
+      <div class="inputData">
+        <span>Seleccione la categoria del articulo</span>
+        <mat-form-field class="form-articulo">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="articuloCat" required>
+            <mat-option>--</mat-option>
+            <mat-option
+              *ngFor="let categoria of categoriasArray"
+              [value]="categoria"
+              >{{ categoria.Descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCat').hasError('required')"
+            >Es necesario seleccionar una categoria</mat-error
+          >
         </mat-form-field>
-      </p>
-      <section class="consumible">
-          <mat-checkbox class="consum-margin" [(ngModel)]="consumible" [labelPosition]="posConsumible">Es consumible</mat-checkbox>
-      </section>
-      
-      <p>
-        <mat-form-field class="form-registro">
-          <mat-label>Cantidad</mat-label>
-          <input matInput />
+      </div>
+
+      <div class="inputData">
+        <span>Datos del articulo</span>
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloDesc"
+            matInput
+            placeholder="Nombre del articulo"
+            type="text"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('minlength')"
+            >Se requieren minimo 3 caracteres en este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
         </mat-form-field>
-      </p>  
-      <p>
-        <mat-form-field class="form-registro">
-          <mat-label>Cantidad minima</mat-label>
-          <input matInput />
+      </div>
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloCodigo"
+            matInput
+            placeholder="Codigo del articulo"
+            type="text"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('minlength')"
+            >Se requieren minimo 3 caracteres en este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
         </mat-form-field>
-      </p>  
-</div>
+      </div>
+
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloStock"
+            matInput
+            placeholder="Cantidad en stock"
+            type="number"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloStock').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('min')"
+            >La cantidad minima permitida para stock es 1</mat-error
+          >
+          <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('max')"
+            >La cantidad maxima permitida para stock es 100</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <mat-label>Estatus</mat-label>
+          <mat-select formControlName="articuloEstatus" required>
+            <mat-option>--</mat-option>
+            <mat-option
+              *ngFor="let estatus of estatusArray"
+              [value]="estatus"
+              >{{ estatus }}</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="articuloInfo.get('articuloEstatus').hasError('required')"
+            >Es necesario seleccionar un estatus</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </form>
+ <mat-divider></mat-divider>
+ <br>
+ <div class="btn-actions">
+  <button (click)="reloadPage()" type="button" class="btn btn-danger">
+    Cancelar
+  </button>
+  <button
+      [swal]="{
+        title: 'Registrar nuevo articulo',
+        text: '¿Estas seguro de registrar un nuevo articulo con los datos proporcionados?',
+        icon: 'warning',
+        confirmButtonText: 'Confirmar',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar'
+      }"
+      (confirm)="saveArticulo()"
+      mat-raised-button
+      color="primary"
+      [disabled]="!articuloInfo.valid"
+      type="button"
+      class="btn-save"
+    >
+      Confirmar
+    </button>
+ </div>
+</mat-card>
+

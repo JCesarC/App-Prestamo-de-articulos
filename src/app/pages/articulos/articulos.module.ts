@@ -12,6 +12,7 @@ import { AllArticulosComponent } from './all-articulos/all-articulos.component';
 import { OperacionesArticuloComponent } from './operaciones-articulo/operaciones-articulo.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ModalEditArticuloComponent } from './modal-edit-articulo/modal-edit-articulo.component';
+import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ModalEditArticuloComponent } from './modal-edit-articulo/modal-edit-art
     AllArticulosComponent,
     OperacionesArticuloComponent,
     ModalEditArticuloComponent,
+    ModalCategoriaComponent,
   ],
   imports: [
     CommonModule,

@@ -1,1 +1,145 @@
-<p>modal-edit-articulo works!</p>
+<h1 mat-dialog-title>Actualizar artículo</h1>
+<mat-dialog-content>
+  <mat-card>
+    <h2>Actualizar los datos correspondientes al articulo seleccionado</h2>
+    <form autocomplete="off" [name]="articuloInfo" [formGroup]="articuloInfo">
+      <div class="inputData">
+        <br />
+        <mat-form-field class="form-articulo">
+          <mat-label>Categoria</mat-label>
+          <mat-select
+            formControlName="articuloCat"
+            required
+            [compareWith]="compareObjects"
+          >
+            <mat-option>--</mat-option>
+            <mat-option
+              *ngFor="let categoria of categoriasArray"
+              [value]="categoria"
+              >{{ categoria.Descripcion }}</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCat').hasError('required')"
+            >Es necesario seleccionar una categoria</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloDesc"
+            matInput
+            placeholder="Nombre del articulo"
+            type="text"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('minlength')"
+            >Se requieren minimo 3 caracteres en este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloDesc').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloCodigo"
+            matInput
+            placeholder="Codigo del articulo"
+            type="text"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('minlength')"
+            >Se requieren minimo 3 caracteres en este campo</mat-error
+          >
+          <mat-error
+            *ngIf="articuloInfo.get('articuloCodigo').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <input
+            formControlName="articuloStock"
+            matInput
+            placeholder="Cantidad en stock"
+            type="number"
+            required
+          />
+          <mat-error
+            *ngIf="articuloInfo.get('articuloStock').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('min')"
+            >La cantidad minima permitida para stock es 1</mat-error
+          >
+          <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('max')"
+            >La cantidad maxima permitida para stock es 100</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="inputData">
+        <mat-form-field class="form-articulo">
+          <mat-label>Estatus</mat-label>
+          <mat-select formControlName="articuloEstatus" required>
+            <mat-option>--</mat-option>
+            <mat-option
+              *ngFor="let estatus of estatusArray"
+              [value]="estatus"
+              >{{ estatus }}</mat-option
+            >
+          </mat-select>
+          <mat-error
+            *ngIf="articuloInfo.get('articuloEstatus').hasError('required')"
+            >Es necesario seleccionar un estatus</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    mat-dialog-close
+    cdkFocusInitial
+  >
+    Cancelar
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!articuloInfo.valid"
+    class="btn-save"
+    [swal]="{
+      title: 'Actualizar categoria',
+      text: '¿Estás seguro de actualizar los datos de la categoria?',
+      icon: 'warning',
+      confirmButtonText: 'Actualizar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'
+    }"
+    (confirm)="updateArticulo()"
+  >
+    Actualizar
+  </button>
+</mat-dialog-actions>

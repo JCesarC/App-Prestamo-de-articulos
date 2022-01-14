@@ -1,1 +1,121 @@
-<p>operaciones-articulo works!</p>
+<mat-accordion multi class="header-align">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Nueva categoria</mat-panel-title>
+      <mat-panel-description
+        >Registrar nueva categoria
+        <mat-icon>account_circle</mat-icon></mat-panel-description
+      >
+    </mat-expansion-panel-header>
+    <div>
+      <form
+        autocomplete="off"
+        [name]="categoriaInfo"
+        [formGroup]="categoriaInfo"
+      >
+        <div class="inputData">
+          <mat-form-field class="form-categoria">
+            <input
+              type="text"
+              formControlName="catDescripcion"
+              matInput
+              placeholder="Descripción de la categoria"
+            />
+            <mat-error
+              *ngIf="categoriaInfo.get('catDescripcion').hasError('required')"
+              >Es necesario rellenar este campo</mat-error
+            >
+            <mat-error
+              *ngIf="categoriaInfo.get('catDescripcion').hasError('minlength')"
+              >Se requieren minimo 5 caracteres en este campo</mat-error
+            >
+            <mat-error
+              *ngIf="categoriaInfo.get('catDescripcion').hasError('maxlength')"
+              >Se alcanzó el limite de caracteres permitidos para este
+              campo</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <mat-action-row>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!categoriaInfo.valid"
+        class="btn-save"
+        [swal]="{
+          title: 'Registro de nueva categoria',
+          text: '¿Estás seguro de crear una nueva categoria?',
+          icon: 'warning',
+          confirmButtonText: 'Confirmar',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }"
+        (confirm)="saveCategoria()"
+      >
+        Guardar
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Categorias de articulos</mat-panel-title>
+      <mat-panel-description>
+        Detalles de las categorias registradas
+        <mat-icon>account_circle</mat-icon></mat-panel-description
+      >
+    </mat-expansion-panel-header>
+    <ng-template #emptyCategorias>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-action">
+          <h2>Aún no se han agregado categorias de articulos al sistema</h2>
+        </li>
+      </ul>
+    </ng-template>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul
+          class="list-group"
+          *ngIf="categoriasArray.length >= 1; else emptyCategorias"
+        >
+          <li
+            class="list-group-item list-group-item-action"
+            *ngFor="let categoria of categoriasArray"
+          >
+            <div class="categorias-title">
+              <button
+                mat-button
+                class="operation-button"
+                (click)="editCategoria(categoria)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-button
+                color="warn"
+                class="operation-button"
+                [swal]="{
+                  title: 'Eliminar categoria',
+                  text:
+                    '¿Estás seguro eliminar la categoria: ' +
+                    categoria.Descripcion +
+                    '?',
+                  icon: 'warning',
+                  confirmButtonText: 'Eliminar',
+                  showCancelButton: true,
+                  cancelButtonText: 'Cancelar'
+                }"
+                (confirm)="deleteCategoria(categoria)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              {{categoria.Descripcion}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

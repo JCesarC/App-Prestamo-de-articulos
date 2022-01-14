@@ -50,24 +50,7 @@
         </mat-form-field>
       </div>
       <div class="inputData">
-        <mat-form-field class="form-registro">
-          <input
-            formControlName="userNombres"
-            matInput
-            placeholder="Nombre(s)s"
-            type="text"
-          />
-          <mat-error *ngIf="userInfo.get('userNombres').hasError('required')"
-            >Es necesario rellenar este campo</mat-error
-          >
-          <mat-error *ngIf="userInfo.get('userNombres').hasError('minlength')"
-            >Se requieren minimo 3 caracteres en este campo</mat-error
-          >
-          <mat-error *ngIf="userInfo.get('userNombres').hasError('maxlength')"
-            >Se alcanzó el limite de caracteres permitidos para este
-            campo</mat-error
-          >
-        </mat-form-field>
+        
       </div>
       <div class="inputData">
         <mat-form-field class="form-registro">
