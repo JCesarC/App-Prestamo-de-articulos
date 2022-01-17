@@ -13,6 +13,7 @@ import { OperacionesArticuloComponent } from './operaciones-articulo/operaciones
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ModalEditArticuloComponent } from './modal-edit-articulo/modal-edit-articulo.component';
 import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.compo
     ReactiveFormsModule,
     MatPaginatorModule,
     MatSortModule,
+    NgbModule,
     SweetAlert2Module.forRoot(),
   ],
 })

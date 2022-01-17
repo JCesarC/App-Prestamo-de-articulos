@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Articulos
+            </mat-panel-title>
+            <mat-panel-description>
+              Generar reporte de los articulos del sistema
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <button mat-raised-button color="primary" (click)="exportAsExcel('Articulos')">Descargar</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel
+                             >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Usuarios
+            </mat-panel-title>
+            <mat-panel-description>
+              Generar reporte de los usuarios del sistema
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <button mat-raised-button color="primary" (click)="exportAsExcel('Usuarios')">Descargar</button>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+</mat-card>
