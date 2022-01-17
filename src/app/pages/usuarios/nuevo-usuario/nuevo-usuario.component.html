@@ -5,7 +5,7 @@
     <mat-divider></mat-divider>
     <div class="rol-class">
       <span>Seleccione el Rol del usuario</span>
-      <section class="rol-section" *ngIf="dataRol.length>=1;else emptyRols">
+      <section class="rol-section" *ngIf="dataRol.length >= 1; else emptyRols">
         <mat-radio-group [(ngModel)]="rol">
           <mat-radio-button
             *ngFor="let item of dataRol"
@@ -18,11 +18,11 @@
       <ng-template #emptyRols>
         <p>
           <ngb-alert [dismissible]="false">
-            <strong>No se han agregado roles. </strong> Agregalos desde el apartado de operaciones.
+            <strong>No se han agregado roles. </strong> Agregalos desde el
+            apartado de operaciones.
           </ngb-alert>
         </p>
       </ng-template>
-     
     </div>
 
     <form autocomplete="off" [name]="userInfo" [formGroup]="userInfo">
@@ -50,7 +50,24 @@
         </mat-form-field>
       </div>
       <div class="inputData">
-        
+        <mat-form-field class="form-registro">
+          <input
+            matInput
+            formControlName="userNombres"
+            placeholder="Nombre(s)"
+            type="text"
+          />
+          <mat-error *ngIf="userInfo.get('userNombres').hasError('required')"
+            >Es necesario rellenar este campo</mat-error
+          >
+          <mat-error *ngIf="userInfo.get('userNombres').hasError('minlength')"
+            >Se requieren minimo 3 caracteres en este campo</mat-error
+          >
+          <mat-error *ngIf="userInfo.get('userNombres').hasError('maxlength')"
+            >Se alcanzó el limite de caracteres permitidos para este
+            campo</mat-error
+          >
+        </mat-form-field>
       </div>
       <div class="inputData">
         <mat-form-field class="form-registro">
@@ -94,7 +111,7 @@
           (confirm)="saveUser()"
           mat-raised-button
           color="primary"
-          [disabled]="!userInfo.valid || dataRol.length<1"
+          [disabled]="!userInfo.valid || dataRol.length < 1"
           class="btn-save"
         >
           Guardar
