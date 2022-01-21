@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Rol, rolResponse } from '@app/shared/models/rol.interface';
-import { environment } from '@env/environment';
+// import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -10,34 +10,35 @@ import { catchError } from 'rxjs/operators';
 })
 export class RolService {
   constructor(private http: HttpClient) {}
+  api = "http://localhost:3000"
 
   getAll(): Observable<Rol[]> {
     return this.http
-      .get<Rol[]>(`${environment.API_URL}/rol`)
+      .get<Rol[]>(`${this.api}/rol`)
       .pipe(catchError(this.handleError));
   }
 
   newRol(dataRol: rolResponse): Observable<any> {
     return this.http
-      .post<Rol>(`${environment.API_URL}/rol`, dataRol)
+      .post<Rol>(`${this.api}/rol`, dataRol)
       .pipe(catchError(this.handleError));
   }
 
   getById(id: number): Observable<Rol> {
     return this.http
-      .get<Rol>(`${environment.API_URL}/rol/${id}`)
+      .get<Rol>(`${this.api}/rol/${id}`)
       .pipe(catchError(this.handleError));
   }
 
   updateRol(id: number, dataRol: rolResponse): Observable<any> {
     return this.http
-      .patch<Rol>(`${environment.API_URL}/rol/${id}`, dataRol)
+      .patch<Rol>(`${this.api}/rol/${id}`, dataRol)
       .pipe(catchError(this.handleError));
   }
 
   deleteRol(id: number): Observable<any> {
     return this.http
-      .delete<Rol>(`${environment.API_URL}/rol/${id}`)
+      .delete<Rol>(`${this.api}/rol/${id}`)
       .pipe(catchError(this.handleError));
   }
 

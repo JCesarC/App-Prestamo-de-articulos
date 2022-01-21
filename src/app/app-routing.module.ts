@@ -38,13 +38,17 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'home',
   },
-  { path: 'reportes', loadChildren: () => import('./pages/reportes/reportes.module').then(m => m.ReportesModule) },
+  {
+    path: 'reportes',
+    loadChildren: () =>
+      import('./pages/reportes/reportes.module').then((m) => m.ReportesModule),
+  },
   { path: '**', pathMatch: 'full', redirectTo: 'notFound' },
-  { path: 'nuevo', component:  NuevoPrestamoComponent},
+  { path: 'nuevo', component: NuevoPrestamoComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
