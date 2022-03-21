@@ -50,6 +50,58 @@
           >
         </mat-form-field>
       </div>
+
+      <ng-container *ngIf="ubicacionesArray.length<1; then emptyUbicaciones"></ng-container>
+    <ng-template #emptyUbicaciones>
+      <p>
+        <ngb-alert [dismissible]="false">
+          <strong>No se han agregado ubicaciones. </strong> Agrega desde el apartado de operaciones.
+        </ngb-alert>
+      </p>
+    </ng-template>
+    <div class="inputData">
+      
+      <mat-form-field class="form-articulo">
+        <mat-label>Ubicación</mat-label>
+        <mat-select formControlName="articuloUbi" required [compareWith]="compareObjects">
+          <mat-option>--</mat-option>
+          <mat-option
+            *ngFor="let ubicacion of ubicacionesArray"
+            [value]="ubicacion"
+            >{{ ubicacion.Descripcion }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="articuloInfo.get('articuloUbi').hasError('required')"
+          >Es necesario seleccionar una ubicacion</mat-error
+        >
+      </mat-form-field>
+    </div>
+    
+    <div class="inputData">
+      <mat-form-field class="form-articulo">
+        <input
+          formControlName="articuloReferencia"
+          matInput
+          placeholder="Referencia de ubicación del articulo"
+          type="text"
+          required
+        />
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('required')"
+          >Es necesario rellenar este campo</mat-error
+        >
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('minlength')"
+          >Se requieren minimo 3 caracteres en este campo</mat-error
+        >
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('maxlength')"
+          >Se alcanzó el limite de caracteres permitidos para este
+          campo</mat-error
+        >
+      </mat-form-field>
+    </div>
+
       <div class="inputData">
         <mat-form-field class="form-articulo">
           <input
@@ -74,6 +126,13 @@
           >
         </mat-form-field>
       </div>
+      <div class="inputData">
+        <p>
+          <mat-checkbox formControlName="articuloConsumible"
+            >Es consumible</mat-checkbox
+          >
+        </p>
+      </div>
 
       <div class="inputData">
         <mat-form-field class="form-articulo">
@@ -89,7 +148,7 @@
             >Es necesario rellenar este campo</mat-error
           >
           <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('min')"
-            >La cantidad minima permitida para stock es 1</mat-error
+            >La cantidad minima permitida para stock es 0</mat-error
           >
           <mat-error *ngIf="articuloInfo.get('articuloStock').hasError('max')"
             >La cantidad maxima permitida para stock es 100</mat-error

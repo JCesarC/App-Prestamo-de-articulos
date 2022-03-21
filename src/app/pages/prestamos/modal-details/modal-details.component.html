@@ -11,13 +11,13 @@
       class="close"
       aria-label="Close"
       (click)="activeModal.dismiss('Cross click')"
-    > 
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <mat-accordion class="example-headers-align" multi>
-      <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
         <mat-expansion-panel-header>
           <mat-panel-title> Datos del Prestamo </mat-panel-title>
           <mat-panel-description>
@@ -27,7 +27,7 @@
         </mat-expansion-panel-header>
         <div class="row">
           <div class="content-form">
-            <mat-form-field class="form-fields" >
+            <mat-form-field class="form-fields">
               <mat-label>Usuario</mat-label>
               <input matInput type="text" [formControl]="inputUsuario" />
             </mat-form-field>
@@ -77,16 +77,24 @@
           </div>
         </div>
       </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)">
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
         <mat-expansion-panel-header>
           <mat-panel-title> Articulos </mat-panel-title>
           <mat-panel-description>
             Detalles de los articulos del prestamo
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <h2>Articulos</h2>
+        <ng-container
+          *ngIf="articulosArray < 1; then emptyArticulos"
+        ></ng-container>
+        <ng-template #emptyArticulos>
+          <ngb-alert [dismissible]="false">
+            <strong>Se han eliminado los articulos</strong>
+          </ngb-alert>
+        </ng-template>
         <div class="row">
           <div class="col-md-8">
-            <h2>Articulos</h2>
             <ul class="list-group">
               <li
                 class="list-group-item list-group-item-action"

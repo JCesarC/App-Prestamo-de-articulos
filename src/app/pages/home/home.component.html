@@ -1,1 +1,65 @@
 <h1>Laboratorio de Redes y Electrónica</h1>
+<mat-divider></mat-divider>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card-box bg-blue">
+        <div class="inner">
+          <h3>{{ countPrestamos }}</h3>
+          <h3>Prestamos registrados</h3>
+        </div>
+        <div class="icon">
+          <fa-icon [icon]="faFileAlt"></fa-icon>
+        </div>
+        <a [routerLink]="['/prestamos']" class="card-box-footer"
+          >Ver más <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-box bg-green">
+        <div class="inner">
+          <h3>{{ countPrestamosToday }}</h3>
+          <h3>Prestamos hoy</h3>
+        </div>
+        <div class="icon">
+          <fa-icon [icon]="faShareSquare"></fa-icon>
+        </div>
+        <a [routerLink]="['/prestamos']" class="card-box-footer"
+          >Ver más <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card-box bg-orange">
+        <div class="inner">
+          <h3>{{ countArticulos }}</h3>
+          <h3>Articulos registrados</h3>
+        </div>
+        <div class="icon">
+          <fa-icon [icon]="faDatabase"></fa-icon>
+        </div>
+        <a [routerLink]="['/articulos']" class="card-box-footer"
+          >Ver más <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-box bg-red">
+        <div class="inner">
+          <h3>{{ countUsuarios }}</h3>
+          <h3>Usuarios registrados</h3>
+        </div>
+        <div class="icon">
+          <fa-icon [icon]="faUserFriends"></fa-icon>
+        </div>
+        <a [routerLink]="['/usuarios']" class="card-box-footer"
+          >Ver más <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

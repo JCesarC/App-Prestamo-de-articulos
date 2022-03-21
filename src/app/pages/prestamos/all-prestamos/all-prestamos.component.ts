@@ -267,5 +267,11 @@ export class AllPrestamosComponent implements OnInit, AfterViewInit {
     return today;
   }
 
-  deletePrestamo(element: Prestamo) {}
+  async deletePrestamo(element: Prestamo) {
+    let res =  await this.prestamoSvc.deletePrestamo(element.id).toPromise();
+    if(res){
+      console.log(res);
+      this.showConfirmado(res.message)
+    }
+  }
 }

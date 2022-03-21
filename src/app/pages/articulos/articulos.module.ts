@@ -14,6 +14,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ModalEditArticuloComponent } from './modal-edit-articulo/modal-edit-articulo.component';
 import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalUbicacionComponent } from './modal-ubicacion/modal-ubicacion.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     OperacionesArticuloComponent,
     ModalEditArticuloComponent,
     ModalCategoriaComponent,
+    ModalUbicacionComponent,
   ],
   imports: [
     CommonModule,

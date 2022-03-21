@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { environment } from '@env/environment';
+import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -15,34 +15,34 @@ export class CategoriaService {
 
   getAll(): Observable<Categoria[]> {
     return this.http
-      .get<Categoria[]>(`${this.api}/categorias`)
+      .get<Categoria[]>(`${environment.API_URL}/categorias`)
       .pipe(catchError(this.handleError));
   }
 
   getById(id: number): Observable<Categoria> {
     return this.http
-      .get<Categoria>(`${this.api}/categorias/${id}`)
+      .get<Categoria>(`${environment.API_URL}/categorias/${id}`)
       .pipe(catchError(this.handleError));
   }
 
-  newCategoria(dataCategoria: Categoria): Observable<any> {
+  newCategoria(dataCategoria: CategoriaResponse): Observable<any> {
     return this.http
-      .post<Categoria>(`${this.api}/categorias`, dataCategoria)
+      .post<Categoria>(`${environment.API_URL}/categorias`, dataCategoria)
       .pipe(catchError(this.handleError));
   }
 
   updateCategoria(id: number, dataCategoria: CategoriaResponse): Observable<any> {
     return this.http
       .patch<Categoria>(
-        `${this.api}/categorias/${id}`,
+        `${environment.API_URL}/categorias/${id}`,
         dataCategoria
       )
       .pipe(catchError(this.handleError));
   }
 
-  deleteCategoria(id: number): Observable<{}> {
+  deleteCategoria(id: number): Observable<any> {
     return this.http
-      .delete<Categoria>(`${this.api}/categorias/${id}`)
+      .delete<Categoria>(`${environment.API_URL}/categorias/${id}`)
       .pipe(catchError(this.handleError));
   }
 

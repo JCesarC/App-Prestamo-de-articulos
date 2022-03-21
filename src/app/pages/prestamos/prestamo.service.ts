@@ -5,7 +5,7 @@ import {
   prestamoResponse,
   prestamoUpdate,
 } from '@app/shared/models/prestamo.interface';
-// import { environment } from '@env/environment';
+import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -19,31 +19,31 @@ export class PrestamoService {
 
   getAll(): Observable<Prestamo[]> {
     return this.http
-      .get<Prestamo[]>(`${this.api}/prestamos`)
+      .get<Prestamo[]>(`${environment.API_URL}/prestamos`)
       .pipe(catchError(this.handleError));
   }
 
   getEstatus(): Observable<Prestamo[]> {
     return this.http
-      .get<Prestamo[]>(`${this.api}/prestamos/estatus`)
+      .get<Prestamo[]>(`${environment.API_URL}/prestamos/estatus`)
       .pipe(catchError(this.handleError));
   }
 
   newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {
     return this.http
-      .post<Prestamo>(`${this.api}/prestamos`, dataPrestamo)
+      .post<Prestamo>(`${environment.API_URL}/prestamos`, dataPrestamo)
       .pipe(catchError(this.handleError));
   }
 
   confirmarPrestamo(id: number, dataPrestamo: prestamoUpdate) {
     return this.http
-      .patch<any>(`${this.api}/prestamos/${id}`, dataPrestamo)
+      .patch<any>(`${environment.API_URL}/prestamos/${id}`, dataPrestamo)
       .pipe(catchError(this.handleError));
   }
 
-  deletePrestamo(id: number): Observable<{}> {
+  deletePrestamo(id: number): Observable<any> {
     return this.http
-      .delete<Prestamo>(`${this.api}/prestamos/${id}`)
+      .delete<any>(`${environment.API_URL}/prestamos/${id}`)
       .pipe(catchError(this.handleError));
   }
 

@@ -5,11 +5,14 @@
   <br />
 
   <form autocomplete="off" [name]="articuloInfo" [formGroup]="articuloInfo">
-    <ng-container *ngIf="categoriasArray.length<1; then emptyCategorias"></ng-container>
+    <ng-container
+      *ngIf="categoriasArray.length < 1; then emptyCategorias"
+    ></ng-container>
     <ng-template #emptyCategorias>
       <p>
         <ngb-alert [dismissible]="false">
-          <strong>No se han agregado categorias. </strong> Agrega desde el apartado de operaciones.
+          <strong>No se han agregado categorias. </strong> Agrega desde el
+          apartado de operaciones.
         </ngb-alert>
       </p>
     </ng-template>
@@ -30,7 +33,6 @@
         >
       </mat-form-field>
     </div>
-
 
     <div class="inputData">
       <span>Datos del articulo</span>
@@ -56,6 +58,59 @@
         >
       </mat-form-field>
     </div>
+    <ng-container
+      *ngIf="ubicacionesArray.length < 1; then emptyUbicaciones"
+    ></ng-container>
+    <ng-template #emptyUbicaciones>
+      <p>
+        <ngb-alert [dismissible]="false">
+          <strong>No se han agregado ubicaciones. </strong> Agrega desde el
+          apartado de operaciones.
+        </ngb-alert>
+      </p>
+    </ng-template>
+    <div class="inputData">
+      <span>Seleccione la ubicación del articulo</span>
+      <mat-form-field class="form-articulo">
+        <mat-label>Ubicación</mat-label>
+        <mat-select formControlName="articuloUbi" required>
+          <mat-option>--</mat-option>
+          <mat-option
+            *ngFor="let ubicacion of ubicacionesArray"
+            [value]="ubicacion"
+            >{{ ubicacion.Descripcion }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="articuloInfo.get('articuloUbi').hasError('required')"
+          >Es necesario seleccionar una ubicacion</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="inputData">
+      <mat-form-field class="form-articulo">
+        <input
+          formControlName="articuloReferencia"
+          matInput
+          placeholder="Referencia de ubicación del articulo"
+          type="text"
+          required
+        />
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('required')"
+          >Es necesario rellenar este campo</mat-error
+        >
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('minlength')"
+          >Se requieren minimo 3 caracteres en este campo</mat-error
+        >
+        <mat-error
+          *ngIf="articuloInfo.get('articuloReferencia').hasError('maxlength')"
+          >Se alcanzó el limite de caracteres permitidos para este
+          campo</mat-error
+        >
+      </mat-form-field>
+    </div>
+
     <div class="inputData">
       <mat-form-field class="form-articulo">
         <input
@@ -79,6 +134,14 @@
           campo</mat-error
         >
       </mat-form-field>
+    </div>
+
+    <div class="inputData">
+      <p>
+        <mat-checkbox formControlName="articuloConsumible"
+          >Es consumible</mat-checkbox
+        >
+      </p>
     </div>
 
     <div class="inputData">

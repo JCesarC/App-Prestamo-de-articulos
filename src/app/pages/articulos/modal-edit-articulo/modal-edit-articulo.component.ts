@@ -1,10 +1,13 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ArticuloResponse } from '@app/shared/models/articulo.interface';
+import {
+  Articulo,
+  ArticuloResponse,
+} from '@app/shared/models/articulo.interface';
 import { Categoria } from '@app/shared/models/categoria.interface';
+import { Ubicacion } from '@app/shared/models/ubicacion.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Articulo } from 'api-lab/src/entity/Articulos';
 
 @Component({
   selector: 'app-modal-edit-articulo',
@@ -22,10 +25,13 @@ export class ModalEditArticuloComponent implements OnInit {
   estatusArray = ['DISPONIBLE', 'NO DISPONIBLE'];
 
   categoriasArray: Categoria[] = [];
+  ubicacionesArray: Ubicacion[] = [];
+
   dataArticulo: Articulo;
 
   articuloInfo = this.fb.group({
     articuloCat: ['', Validators.required],
+    articuloUbi: ['', Validators.required],
     articuloDesc: [
       '',
       Validators.compose([
@@ -42,24 +48,35 @@ export class ModalEditArticuloComponent implements OnInit {
         Validators.minLength(3),
       ]),
     ],
+    articuloReferencia: [
+      '',
+      Validators.compose([
+        Validators.required,
+        Validators.maxLength(60),
+        Validators.minLength(3),
+      ]),
+    ],
     articuloStock: [
       '',
       Validators.compose([
         Validators.required,
-        Validators.min(1),
+        Validators.min(0),
         Validators.max(100),
       ]),
     ],
     articuloEstatus: ['', Validators.required],
+    articuloConsumible: false,
   });
 
   ngOnInit(): void {
     this.categoriasArray = this.data.categorias;
+    this.ubicacionesArray = this.data.ubicaciones;
     this.dataArticulo = this.data.dataArticulo;
     console.log(this.dataArticulo);
     console.log(this.categoriasArray);
 
     this.articuloInfo.get('articuloCat').setValue(this.dataArticulo.Categoria);
+    this.articuloInfo.get('articuloUbi').setValue(this.dataArticulo.Ubicacion);
     this.articuloInfo
       .get('articuloDesc')
       .setValue(this.dataArticulo.Descripcion);
@@ -68,14 +85,20 @@ export class ModalEditArticuloComponent implements OnInit {
     this.articuloInfo
       .get('articuloEstatus')
       .setValue(this.dataArticulo.Estatus);
+    this.articuloInfo
+      .get('articuloConsumible')
+      .setValue(this.dataArticulo.Consumible);
   }
 
   updateArticulo() {
     let Categoria = this.articuloInfo.get('articuloCat').value;
     let Descripcion = this.articuloInfo.get('articuloDesc').value;
+    let Ubicacion = this.articuloInfo.get('articuloUbi').value;
     let Codigo = this.articuloInfo.get('articuloCodigo').value;
     let Stock = this.articuloInfo.get('articuloStock').value;
     let Estatus = this.articuloInfo.get('articuloEstatus').value;
+    let Consumible = this.articuloInfo.get('articuloConsumible').value;
+    let ReferenciaUbicacion = this.articuloInfo.get('articuloReferencia').value;
 
     let articuloUpd: ArticuloResponse = {
       Descripcion: Descripcion,
@@ -83,6 +106,9 @@ export class ModalEditArticuloComponent implements OnInit {
       Codigo: Codigo,
       Stock: Stock,
       Categoria: Categoria,
+      Consumible: Consumible,
+      Ubicacion: Ubicacion,
+      ReferenciaUbicacion: ReferenciaUbicacion,
     };
 
     console.log(articuloUpd);

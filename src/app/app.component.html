@@ -7,13 +7,16 @@
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Laboratorio
+  <div style="text-align: left">
+    <a mat-button [routerLink]="['/home']">
+      <img src="../assets/imgs/ISC_logo.png" width="100" />
+    </a>
+  </div>
+  <h2>Laboratorio de Redes y Electrónica</h2>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <div class="flex-container">
-    
-  </div>
+  <div class="flex-container"></div>
   <mat-sidenav #sidenav="matSidenav">
     <button mat-button class="menu-button">
       <mat-icon>person</mat-icon>
@@ -41,7 +44,7 @@
 
     <a
       mat-button
-      class="menu-button"
+      class="nav-link menu-button"
       [routerLink]="['/usuarios']"
       routerLinkActive="router-link-active"
     >
@@ -50,7 +53,7 @@
     </a>
     <a
       mat-button
-      class="menu-button"
+      class="nav-link menu-button"
       [routerLink]="['/articulos']"
       routerLinkActive="router-link-active"
     >
@@ -59,7 +62,7 @@
     </a>
     <a
       mat-button
-      class="menu-button"
+      class="nav-link menu-button"
       [routerLink]="['/reportes']"
       routerLinkActive="router-link-active"
     >
@@ -70,7 +73,7 @@
     <mat-divider></mat-divider>
     <button mat-button class="menu-button">
       <mat-icon>info</mat-icon>
-      <span>Otros</span>
+      <span>Info</span>
     </button>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -80,11 +83,6 @@
         <!-- <app-footer></app-footer> -->
       </div>
     </div>
-    
-
   </mat-sidenav-content>
-  
 </mat-sidenav-container>
 <!-- <app-header></app-header> -->
-
-
