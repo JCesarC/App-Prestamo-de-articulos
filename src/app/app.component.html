@@ -71,10 +71,15 @@
     </a>
 
     <mat-divider></mat-divider>
-    <button mat-button class="menu-button">
+    <a
+      mat-button
+      class="nav-link menu-button"
+      [routerLink]="['/info']"
+      routerLinkActive="router-link-active"
+    >
       <mat-icon>info</mat-icon>
       <span>Info</span>
-    </button>
+    </a>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z4">

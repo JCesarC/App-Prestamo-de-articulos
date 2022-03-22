@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Prestamo } from '@app/shared/models/prestamo.interface';
 import {
   faArrowCircleRight,
@@ -18,7 +18,7 @@ import { UserService } from '../usuarios/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   faFileAlt = faFileAlt;
   faUserFriends = faUserFriends;
   faDatabase = faDatabase;
@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit {
     private articuloSvc: ArticuloService,
     private usrSvc: UserService
   ) {}
+  ngAfterViewInit(): void {
+    this.updateEstatus();
+  }
 
   ngOnInit(): void {
     this.getTodayDate();
@@ -81,6 +84,9 @@ export class HomeComponent implements OnInit {
     return this.articuloSvc.getAll().toPromise();
   }
 
+  async updateEstatus() {
+    await this.prestamoSvc.getEstatus().toPromise();
+  }
   filterDates(data: Prestamo[]): any {
     const datesCounter = {};
     for (const prestamo of data) {

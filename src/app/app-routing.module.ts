@@ -39,12 +39,17 @@ const routes: Routes = [
     redirectTo: 'home',
   },
   {
+    path: 'info',
+    loadChildren: () =>
+      import('./pages/info/info.module').then((m) => m.InfoModule),
+  },
+  {
     path: 'reportes',
     loadChildren: () =>
       import('./pages/reportes/reportes.module').then((m) => m.ReportesModule),
   },
   { path: '**', pathMatch: 'full', redirectTo: 'notFound' },
-  { path: 'nuevo', component: NuevoPrestamoComponent },
+  
 ];
 
 @NgModule({
