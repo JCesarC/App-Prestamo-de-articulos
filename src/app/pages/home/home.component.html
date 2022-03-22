@@ -62,4 +62,129 @@
       </div>
     </div>
   </div>
+  <mat-divider></mat-divider>
+  <br />
+
+  <mat-card>
+    <h1>Prestamo Rápido</h1>
+    <mat-divider></mat-divider>
+    <br />
+    <div class="inputData">
+      <mat-form-field class="form-fields" appearance="fill">
+        <mat-label>Buscar usuario</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userSearch"
+          autocomplete="off"
+          (keyup.enter)="openModal('users')"
+        />
+        <button
+          mat-button
+          matSuffix
+          mat-stroked-button
+          aria-label="search"
+          (click)="openModal('users')"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="inputData">
+      <mat-form-field class="form-fields">
+        <mat-label>Nombre</mat-label>
+
+        <input
+          matInput
+          [(ngModel)]="userSelected.Nombres"
+          [formControl]="inputUsuario"
+        />
+      </mat-form-field>
+    </div>
+    <br />
+    <div class="inputData">
+      <mat-form-field class="form-fields" appearance="fill">
+        <mat-label>Buscar articulo</mat-label>
+        <input
+          matInput
+          [(ngModel)]="articuloSearch"
+          (keyup.enter)="openModal('articulos')"
+        />
+        <button
+          mat-button
+          matSuffix
+          mat-stroked-button
+          aria-label="search"
+          (click)="openModal('articulos')"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="inputData">
+      <div
+        class="listArticulos"
+        *ngIf="articuloSelected.id != 0; else emptyArticulos"
+      >
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action">
+            <div class="articulos-title">
+              <button
+                mat-button
+                class="operation-button"
+                (click)="addArticulo(articuloSelected)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button
+                mat-button
+                class="operation-button"
+                (click)="removeArticulo(articuloSelected)"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+
+              <span class="badge badge-primary">
+                {{ articuloSelected.Cantidad }}</span
+              >
+              {{ articuloSelected.Descripcion }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-actions">
+      <button (click)="reloadPage()" type="button" class="btn btn-danger">
+        Cancelar
+      </button>
+
+      <button
+        [swal]="{
+          title: 'Confirmar prestamo',
+          text: '¿Estas seguro de guardar este prestamo?',
+          icon: 'warning',
+          confirmButtonText: 'Confirmar',
+          showCancelButton: true,
+          cancelButtonText: 'Cancelar'
+        }"
+        (confirm)="savePrestamo()"
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="btn-save"
+      >
+        Confirmar
+      </button>
+    </div>
+  </mat-card>
 </div>
+<ng-template #emptyArticulos>
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-action">
+          <h2>Agregue un articulo</h2>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

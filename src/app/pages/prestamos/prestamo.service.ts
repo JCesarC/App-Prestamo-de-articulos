@@ -8,6 +8,7 @@ import {
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { prestamoQuick } from '../../shared/models/prestamo.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ import { catchError } from 'rxjs/operators';
 export class PrestamoService {
   constructor(private http: HttpClient) {}
 
-  api = "http://localhost:3000"
+  api = 'http://localhost:3000';
 
   getAll(): Observable<Prestamo[]> {
     return this.http
@@ -32,6 +33,15 @@ export class PrestamoService {
   newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {
     return this.http
       .post<Prestamo>(`${environment.API_URL}/prestamos`, dataPrestamo)
+      .pipe(catchError(this.handleError));
+  }
+
+  newPrestamoSolo(dataPrestamo: prestamoQuick): Observable<any> {
+    return this.http
+      .post<prestamoQuick>(
+        `${environment.API_URL}/prestamos/solo`,
+        dataPrestamo
+      )
       .pipe(catchError(this.handleError));
   }
 

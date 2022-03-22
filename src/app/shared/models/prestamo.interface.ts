@@ -29,6 +29,12 @@ export interface prestamoResponse {
   comentarios: string;
 }
 
+export interface prestamoQuick {
+  articuloObject: Articulo;
+  Cantidad: number;
+  usuarioObject: User;
+}
+
 export interface prestamoUpdate {
   articulosId: string;
   cantidadArticulos: string;

@@ -63,3 +63,43 @@
 .bg-red {
     background-color: #d9534f !important;
 }
+.search-form-field {
+    width: 60%;
+    size: 10%;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
+  .form-fields{
+  
+    width: 90%;
+    size: 10%;
+    
+  }
+  .inputData{
+    width: 100%;
+    margin: 20px;
+  }
+  .form-modal{
+    width: 100%;
+  }
+  .btn-end{
+  
+    float:right;
+    .btn{
+      margin-right: 10px;
+    }
+  }
+  .listArticulos{
+    width: 100%;
+  }
+  .btn-actions {
+    margin-left: 20px;
+    margin-right: 30px;
+  }
+  .btn-save {
+    float: right;
+    margin-left: 20px;
+    margin-right: 40px;
+  }
