@@ -10,11 +10,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class RolService {
   constructor(private http: HttpClient) {}
+  api = "http://localhost:3000"
 
   getAll(): Observable<Rol[]> {
     return this.http
       .get<Rol[]>(`${environment.API_URL}/rol`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   newRol(dataRol: rolResponse): Observable<any> {

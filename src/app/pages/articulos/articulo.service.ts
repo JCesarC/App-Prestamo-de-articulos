@@ -11,11 +11,12 @@ import { Articulo, ArticuloResponse } from '@app/shared/models/articulo.interfac
 })
 export class ArticuloService {
   constructor(private http: HttpClient) {}
+  api = "http://localhost:3000"
 
   getAll(): Observable<Articulo[]> {
     return this.http
       .get<Articulo[]>(`${environment.API_URL}/articulos`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getById(id: number): Observable<Articulo> {
@@ -38,7 +39,7 @@ export class ArticuloService {
 
   deleteArticulo(id: number): Observable<any> {
     return this.http
-      .delete<Articulo>(`${environment.API_URL}/articulos/${id}`)
+      .delete<any>(`${environment.API_URL}/articulos/${id}`)
       .pipe(catchError(this.handleError));
   }
 

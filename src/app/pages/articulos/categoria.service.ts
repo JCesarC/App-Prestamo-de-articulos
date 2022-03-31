@@ -11,11 +11,12 @@ import { Categoria, CategoriaResponse } from '@app/shared/models/categoria.inter
 })
 export class CategoriaService {
   constructor(private http: HttpClient) {}
+  api = "http://localhost:3000"
 
   getAll(): Observable<Categoria[]> {
     return this.http
       .get<Categoria[]>(`${environment.API_URL}/categorias`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getById(id: number): Observable<Categoria> {
@@ -24,7 +25,7 @@ export class CategoriaService {
       .pipe(catchError(this.handleError));
   }
 
-  newCategoria(dataCategoria: Categoria): Observable<any> {
+  newCategoria(dataCategoria: CategoriaResponse): Observable<any> {
     return this.http
       .post<Categoria>(`${environment.API_URL}/categorias`, dataCategoria)
       .pipe(catchError(this.handleError));
@@ -39,7 +40,7 @@ export class CategoriaService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteCategoria(id: number): Observable<{}> {
+  deleteCategoria(id: number): Observable<any> {
     return this.http
       .delete<Categoria>(`${environment.API_URL}/categorias/${id}`)
       .pipe(catchError(this.handleError));

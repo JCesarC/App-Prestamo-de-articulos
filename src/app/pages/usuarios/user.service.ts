@@ -10,11 +10,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
+  api = 'http://localhost:3000';
 
   getAll(): Observable<User[]> {
     return this.http
       .get<User[]>(`${environment.API_URL}/users`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getById(id: number): Observable<User> {
@@ -35,7 +36,7 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteUser(id: number): Observable<{any}> {
+  deleteUser(id: number): Observable<any> {
     return this.http
       .delete<any>(`${environment.API_URL}/users/${id}`)
       .pipe(catchError(this.handleError));

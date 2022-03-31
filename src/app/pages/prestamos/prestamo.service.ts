@@ -8,6 +8,7 @@ import {
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { prestamoQuick } from '../../shared/models/prestamo.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,21 +16,32 @@ import { catchError } from 'rxjs/operators';
 export class PrestamoService {
   constructor(private http: HttpClient) {}
 
+  api = 'http://localhost:3000';
+
   getAll(): Observable<Prestamo[]> {
     return this.http
       .get<Prestamo[]>(`${environment.API_URL}/prestamos`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getEstatus(): Observable<Prestamo[]> {
     return this.http
       .get<Prestamo[]>(`${environment.API_URL}/prestamos/estatus`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {
     return this.http
       .post<Prestamo>(`${environment.API_URL}/prestamos`, dataPrestamo)
+      .pipe(catchError(this.handleError));
+  }
+
+  newPrestamoSolo(dataPrestamo: prestamoQuick): Observable<any> {
+    return this.http
+      .post<prestamoQuick>(
+        `${environment.API_URL}/prestamos/solo`,
+        dataPrestamo
+      )
       .pipe(catchError(this.handleError));
   }
 
@@ -39,9 +51,9 @@ export class PrestamoService {
       .pipe(catchError(this.handleError));
   }
 
-  deletePrestamo(id: number): Observable<{}> {
+  deletePrestamo(id: number): Observable<any> {
     return this.http
-      .delete<Prestamo>(`${environment.API_URL}/prestamos/${id}`)
+      .delete<any>(`${environment.API_URL}/prestamos/${id}`)
       .pipe(catchError(this.handleError));
   }
 

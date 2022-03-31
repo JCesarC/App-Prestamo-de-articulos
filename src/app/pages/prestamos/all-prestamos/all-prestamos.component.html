@@ -4,7 +4,6 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input />
 </mat-form-field> -->
 
-
 <div *ngIf="isLoading">
   <div class="mat-elevation-z8 loading">
     <h1>Cargando registros...</h1>
@@ -13,7 +12,7 @@
     </mat-progress-spinner>
   </div>
 </div>
-<div #showData [ngClass]=" !isLoading? 'visible':'hidden'">
+<div #showData [ngClass]="!isLoading ? 'visible' : 'hidden'">
   <div class="search-div">
     <mat-form-field class="search-form-field">
       <input
@@ -149,11 +148,18 @@
               </button>
 
               <button
-                class="btn-actions"
+                [swal]="{
+                  title: 'Cancelar prestamo',
+                  text: '¿Estás seguro de eliminar el prestamo seleccionado?',
+                  icon: 'warning',
+                  confirmButtonText: 'Eliminar',
+                  showCancelButton: true,
+                  cancelButtonText: 'Cancelar'
+                }"
+                (confirm)="deletePrestamo(element)"
                 mat-mini-fab
                 color="warn"
-                aria-label="Example icon button with a bookmark icon"
-                (click)="deletePrestamo(element)"
+                class="btn-action"
               >
                 <mat-icon>delete</mat-icon>
               </button>

@@ -20,6 +20,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 
 const myModules = [
   MatToolbarModule,
@@ -44,6 +46,8 @@ const myModules = [
   MatRadioModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
+  MatGridListModule,
+  MatTooltipModule
 ];
 
 @NgModule({
