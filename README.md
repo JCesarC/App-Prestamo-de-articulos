@@ -1,6 +1,6 @@
 ## Front-end laboratorio de redes y electronica
 
-Desarrolado con Angular.
+Desarrollado con Angular.
 
 Sistema para el control de prestamos de articulos a usuarios en el laboratorio de redes y electronica. 
 
