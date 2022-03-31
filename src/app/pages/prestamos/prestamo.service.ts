@@ -21,13 +21,13 @@ export class PrestamoService {
   getAll(): Observable<Prestamo[]> {
     return this.http
       .get<Prestamo[]>(`${environment.API_URL}/prestamos`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getEstatus(): Observable<Prestamo[]> {
     return this.http
       .get<Prestamo[]>(`${environment.API_URL}/prestamos/estatus`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   newPrestamo(dataPrestamo: prestamoResponse): Observable<any> {

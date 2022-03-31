@@ -16,7 +16,7 @@ export class CategoriaService {
   getAll(): Observable<Categoria[]> {
     return this.http
       .get<Categoria[]>(`${environment.API_URL}/categorias`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getById(id: number): Observable<Categoria> {

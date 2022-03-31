@@ -15,7 +15,7 @@ export class RolService {
   getAll(): Observable<Rol[]> {
     return this.http
       .get<Rol[]>(`${environment.API_URL}/rol`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   newRol(dataRol: rolResponse): Observable<any> {

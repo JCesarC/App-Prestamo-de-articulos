@@ -17,7 +17,7 @@ export class UbicacionService {
   getAll(): Observable<Ubicacion[]> {
     return this.http
       .get<Ubicacion[]>(`${environment.API_URL}/ubicacion`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   newUbicacion(dataUbicacion: UbicacionResponse): Observable<any> {

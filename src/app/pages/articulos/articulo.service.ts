@@ -16,7 +16,7 @@ export class ArticuloService {
   getAll(): Observable<Articulo[]> {
     return this.http
       .get<Articulo[]>(`${environment.API_URL}/articulos`)
-      .pipe(catchError(this.handleError));
+      .pipe();
   }
 
   getById(id: number): Observable<Articulo> {

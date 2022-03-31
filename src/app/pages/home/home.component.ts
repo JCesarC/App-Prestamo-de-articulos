@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.getAllPrestamos(),
       this.getAllUsuarios(),
       this.getAllArticulos(),
-    ]).subscribe(([w,x, y, z]) => {
+    ]).subscribe(([w, x, y, z]) => {
       if (x) {
         this.countPrestamos = x.length;
         this.dataPrestamo = x;
@@ -117,7 +117,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async getAllPrestamos() {
-    
     return this.prestamoSvc.getAll().toPromise();
   }
   async getAllUsuarios() {

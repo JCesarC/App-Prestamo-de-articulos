@@ -1,0 +1,45 @@
+<div class="login-form">
+    <mat-card>
+        <mat-card-header>
+            <h2 class="theme_color">Sistema de inventario y control de Prestamos del Laboratorio de redes y electrónica</h2>
+        </mat-card-header>
+        <mat-card-content>
+            <div  *ngIf="!this.isLogin">
+                <h3 >Acceso al sistema</h3>
+            
+                <form #myform="ngForm" (ngSubmit)="tryLogin(myform)" autocomplete="off">
+                  
+                    <mat-form-field class="full-width-input">
+                      <input
+                        matInput
+                        type="text"
+                        name="username"
+                        placeholder="Usuario"
+                        ngModel
+                        
+                      />
+                    </mat-form-field>
+            
+                  
+                    <mat-form-field class="full-width-input">
+                      <input
+                        matInput
+                        type="password"
+                        name="password"
+                        placeholder="Contraseña"
+                        ngModel
+                      />
+                    </mat-form-field>
+                 
+                  <button mat-raised-button type="submit" >Acceder</button>
+                </form>
+              </div>
+            
+              <div  *ngIf="this.isLogin">
+                <h1>Acceso correcto</h1>
+                <button class="btn btn-outline-info" (click)="goHome()">Ir a inicio</button>
+              </div>
+        </mat-card-content>
+    </mat-card>
+  
+</div>

@@ -18,59 +18,75 @@
 <mat-sidenav-container>
   <div class="flex-container"></div>
   <mat-sidenav #sidenav="matSidenav">
-    <button mat-button class="menu-button">
+    <a
+      *ngIf="!isLogin"
+      mat-button
+      class="nav-link menu-button"
+      [routerLink]="['/login']"
+    >
       <mat-icon>person</mat-icon>
-      <span>Usuario</span>
-    </button>
+      <span>Acceder</span>
+    </a>
+    <a
+      *ngIf="isLogin"
+      mat-button
+      class="nav-link menu-button"
+      (click)="logout()"
+    >
+      <mat-icon>person</mat-icon>
+      <span>Cerrar sesión</span>
+    </a>
+
     <mat-divider></mat-divider>
     <!-- <button mat-button class="menu-button">
       <mat-icon>home</mat-icon>
       <span>Inicio</span>
     </button> -->
+    <div *ngIf="isLogin">
+      <a class="nav-link menu-button" mat-button [routerLink]="['/home']">
+        <mat-icon>home</mat-icon>Inicio</a
+      >
 
-    <a class="nav-link menu-button" mat-button [routerLink]="['/home']">
-      <mat-icon>home</mat-icon>Inicio</a
-    >
+      <a
+        mat-button
+        class="nav-link menu-button"
+        routerLink="/prestamos"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>inventory_2</mat-icon>
+        <span>Prestamos</span>
+      </a>
 
-    <a
-      mat-button
-      class="nav-link menu-button"
-      routerLink="/prestamos"
-      routerLinkActive="router-link-active"
-    >
-      <mat-icon>inventory_2</mat-icon>
-      <span>Prestamos</span>
-    </a>
+      <a
+        mat-button
+        class="nav-link menu-button"
+        [routerLink]="['/usuarios']"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>people</mat-icon>
+        <span>Usuarios</span>
+      </a>
+      <a
+        mat-button
+        class="nav-link menu-button"
+        [routerLink]="['/articulos']"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>category</mat-icon>
+        <span>Articulos</span>
+      </a>
+      <a
+        mat-button
+        class="nav-link menu-button"
+        [routerLink]="['/reportes']"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>description</mat-icon>
+        <span>Reportes</span>
+      </a>
+      <mat-divider></mat-divider>
+    </div>
 
-    <a
-      mat-button
-      class="nav-link menu-button"
-      [routerLink]="['/usuarios']"
-      routerLinkActive="router-link-active"
-    >
-      <mat-icon>people</mat-icon>
-      <span>Usuarios</span>
-    </a>
-    <a
-      mat-button
-      class="nav-link menu-button"
-      [routerLink]="['/articulos']"
-      routerLinkActive="router-link-active"
-    >
-      <mat-icon>category</mat-icon>
-      <span>Articulos</span>
-    </a>
-    <a
-      mat-button
-      class="nav-link menu-button"
-      [routerLink]="['/reportes']"
-      routerLinkActive="router-link-active"
-    >
-      <mat-icon>description</mat-icon>
-      <span>Reportes</span>
-    </a>
-
-    <mat-divider></mat-divider>
     <a
       mat-button
       class="nav-link menu-button"
