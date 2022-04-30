@@ -1,5 +1,5 @@
 {
-  "name": "laboratorio",
+  "name": "App-Prestamo-de-articulos",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
+    "angular-cli-ghpages": "^1.0.0",
     "bootstrap": "^4.5.0",
     "chart.js": "^3.7.0",
     "concurrently": "^6.4.0",
