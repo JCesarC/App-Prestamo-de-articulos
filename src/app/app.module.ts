@@ -23,26 +23,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ComponentsModule,
-    MaterialModule,
-    NgbModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SweetAlert2Module.forRoot(),
-    FontAwesomeModule
-  ],
-  providers: [
-    NgbActiveModal,
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [ModalPrestamosComponent],
+    declarations: [AppComponent, HeaderComponent, FooterComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ComponentsModule,
+        MaterialModule,
+        NgbModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SweetAlert2Module.forRoot(),
+        FontAwesomeModule
+    ],
+    providers: [
+        NgbActiveModal,
+        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+        { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
