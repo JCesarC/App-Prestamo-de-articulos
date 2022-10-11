@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { Articulo } from '@app/shared/models/articulo.interface';
 import { Prestamo, pArticulo } from '@app/shared/models/prestamo.interface';
@@ -35,36 +35,36 @@ export class ModalDetailsComponent implements OnInit {
     this.articulosArray = this.dataPrestamo.articulosPrestamo;
     
 
-    this.inputUsuario = new FormControl({
+    this.inputUsuario = new UntypedFormControl({
       value: this.dataPrestamo.Nombres,
       disabled: true,
     });
 
-    this.inputMatricula = new FormControl({
+    this.inputMatricula = new UntypedFormControl({
       value: this.dataPrestamo.MatriculaCodigo,
       disabled: true,
     });
-    this.inputEstatus = new FormControl({
+    this.inputEstatus = new UntypedFormControl({
       value: this.dataPrestamo.Estatus,
       disabled: true,
     });
-    this.inputFechaPrestamo = new FormControl({
+    this.inputFechaPrestamo = new UntypedFormControl({
       value: this.dataPrestamo.Fecha_prestamo,
       disabled: true,
     });
-    this.inputHora = new FormControl({
+    this.inputHora = new UntypedFormControl({
       value: this.dataPrestamo.Hora,
       disabled: true,
     });
-    this.inputFechaLimite = new FormControl({
+    this.inputFechaLimite = new UntypedFormControl({
       value: this.dataPrestamo.Fecha_limite,
       disabled: true,
     });
-    this.inputFechaDevolucion = new FormControl({
+    this.inputFechaDevolucion = new UntypedFormControl({
       value: this.dataPrestamo.Fecha_devolucion,
       disabled: true,
     });
-    this.inputComentarios = new FormControl({
+    this.inputComentarios = new UntypedFormControl({
       value: this.dataPrestamo.Comentarios,
       disabled: true,
     });

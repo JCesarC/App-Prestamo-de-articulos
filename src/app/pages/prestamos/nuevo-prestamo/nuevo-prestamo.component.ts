@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
   NgbModal,
@@ -29,15 +29,15 @@ export class NuevoPrestamoComponent implements OnInit {
   model: NgbDateStruct;
 
   closeModal: string;
-  inputUsuario = new FormControl({ value: '', disabled: true });
-  inputApellidos = new FormControl({ value: '', disabled: true });
-  inputComentarios = new FormControl();
-  inputMatricula = new FormControl({
+  inputUsuario = new UntypedFormControl({ value: '', disabled: true });
+  inputApellidos = new UntypedFormControl({ value: '', disabled: true });
+  inputComentarios = new UntypedFormControl();
+  inputMatricula = new UntypedFormControl({
     value: '',
     disabled: true,
   });
 
-  date = new FormControl(new Date());
+  date = new UntypedFormControl(new Date());
 
   userSearch: string = '';
   articuloSearch: string = '';

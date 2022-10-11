@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { Rol, rolResponse } from '@app/shared/models/rol.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,7 @@ import { RolService } from '../rol.service';
 export class OperacionesUsuarioComponent implements OnInit, AfterViewInit {
   constructor(
     private rolSvc: RolService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private modalService: NgbModal
   ) {}
 

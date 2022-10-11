@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Rol } from '@app/shared/models/rol.interface';
 import { User, userResponse } from '@app/shared/models/user.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -40,7 +40,7 @@ export class ModalEditComponent implements OnInit {
     ],
   });
 
-  constructor(public activeModal:NgbActiveModal, private fb:FormBuilder) { }
+  constructor(public activeModal:NgbActiveModal, private fb:UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.userInfo.get('userMatricula').setValue(this.dataUser.MatriculaCodigo);

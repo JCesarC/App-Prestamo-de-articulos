@@ -6,7 +6,7 @@
  */
 
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import {
   Categoria,
@@ -56,7 +56,7 @@ export class OperacionesArticuloComponent implements OnInit, AfterViewInit {
 
   constructor(
     private catSvc: CategoriaService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private modalService: NgbModal,
     private ubicacionSvc: UbicacionService
   ) {}

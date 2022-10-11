@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, Validators } from '@angular/forms';
 import { Categoria } from '@app/shared/models/categoria.interface';
 import { ArticuloService } from '../articulo.service';
 import { CategoriaService } from '../categoria.service';
@@ -16,7 +16,7 @@ import { Ubicacion } from '@app/shared/models/ubicacion.interface';
 export class NuevoArticuloComponent implements OnInit {
   constructor(
     private artSvc: ArticuloService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private catSvc: CategoriaService,
     private ubiSvc: UbicacionService
   ) {}

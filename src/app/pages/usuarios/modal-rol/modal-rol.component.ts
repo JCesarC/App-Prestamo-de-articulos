@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { rolResponse } from '@app/shared/models/rol.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Rol } from 'api-lab/src/entity/Rols';
@@ -12,7 +12,7 @@ import { Rol } from 'api-lab/src/entity/Rols';
 export class ModalRolComponent implements OnInit {
   @Input() public dataRol: Rol;
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(public activeModal: NgbActiveModal, private fb: UntypedFormBuilder) {}
 
   rolInfo = this.fb.group({
     rolDescripcion: [

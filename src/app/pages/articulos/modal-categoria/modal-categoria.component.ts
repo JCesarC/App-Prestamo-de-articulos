@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import {
   Categoria,
   CategoriaResponse,
@@ -24,7 +24,7 @@ export class ModalCategoriaComponent implements OnInit {
     ],
   });
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(public activeModal: NgbActiveModal, private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.categoriaInfo

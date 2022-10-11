@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Input } from '@angular/core';
 import { Ubicacion } from '@app/shared/models/ubicacion.interface';
 import { UbicacionResponse } from '../../../shared/models/ubicacion.interface';
@@ -23,7 +23,7 @@ export class ModalUbicacionComponent implements OnInit {
     ],
   });
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+  constructor(public activeModal: NgbActiveModal, private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.ubicacionInfo

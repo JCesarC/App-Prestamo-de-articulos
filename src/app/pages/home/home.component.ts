@@ -19,7 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPrestamosComponent } from '../prestamos/modal-prestamos/modal-prestamos.component';
 import { User } from '@app/shared/models/user.interface';
 import { Articulo } from '@app/shared/models/articulo.interface';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { prestamoQuick } from '../../shared/models/prestamo.interface';
 import Swal from 'sweetalert2';
 
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   countArticulos: number = 0;
 
-  inputUsuario = new FormControl({ value: '', disabled: true });
+  inputUsuario = new UntypedFormControl({ value: '', disabled: true });
 
   countUsuarios: number = 0;
 

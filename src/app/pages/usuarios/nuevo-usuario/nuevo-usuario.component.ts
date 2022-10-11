@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Rol } from '@app/shared/models/rol.interface';
 import { RolService } from '../rol.service';
 import {
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -25,7 +25,7 @@ export class NuevoUsuarioComponent implements OnInit {
   constructor(
     private rolSvc: RolService,
     private userSvc: UserService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   userInfo = this.fb.group({
@@ -61,7 +61,7 @@ export class NuevoUsuarioComponent implements OnInit {
   }
 
   public validRols() {
-    return (control: FormControl) => {
+    return (control: UntypedFormControl) => {
       if (this.dataRol.length === 0) {
         return { emptyRols: 'not rols' };
       }
