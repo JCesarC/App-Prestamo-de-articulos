@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { rolResponse } from '@app/shared/models/rol.interface';
+import { Rol, rolResponse } from '@app/shared/models/rol.interface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Rol } from 'api-lab/src/entity/Rols';
 
 @Component({
   selector: 'app-modal-rol',
