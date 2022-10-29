@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild" : "xcopy /i /s \".\/dist\" \"..\\API-App-Prestamos\\public\" \/Y",
     "watch": "ng build --watch --configuration development",
+    "build-windows" : "npm run build && npm run postbuild",
     "test": "ng test",
     "server": "cd api-lab && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run start\""
